@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="com.amf.registration">
+	<namespace>AmfRegistration</namespace>
+
+	<entity name="UserExternal" remote-service="true" local-service="true">
+
+		<!-- PK fields -->
+		<column name="userExternalId" primary="true" type="long"></column>
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="male" type="int"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+
+		<!-- Reference to Group entity service -->
+		<reference entity="User" package-path="com.liferay.portal"></reference>
+		<reference entity="Contact" package-path="com.liferay.portal"></reference>
+		<reference entity="Phone" package-path="com.liferay.portal"></reference>
+		<reference entity="Address" package-path="com.liferay.portal"></reference>
+
+	</entity>
+
+	<!-- Exceptions -->
+	<exceptions>
+		<exception>AmfRegistrationValidation</exception>
+	</exceptions>
+
+</service-builder>
