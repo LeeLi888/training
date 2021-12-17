@@ -53,11 +53,11 @@ public interface UserExternalService extends BaseService {
 	 * Never modify this interface directly. Add custom service methods to <code>com.amf.registration.service.impl.UserExternalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the user external remote service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link UserExternalServiceUtil} if injection and service tracking are not available.
 	 */
 	public UserExternal addUserExternal(
-			long groupId, String firstName, String lastName,
-			String emailAddress, String userName, int male, Date birthday,
-			String password, String homePhoneNumber, String mobilePhoneNumber,
-			String address1, String address2, String city, long state,
-			String zipCode, String queryQuestion, String queryAnswer,
+			String firstName, String lastName, String emailAddress,
+			String userName, int male, Date birthday, String password,
+			String homePhoneNumber, String mobilePhoneNumber, String address1,
+			String address2, String city, long state, String zipCode,
+			String queryQuestion, String queryAnswer,
 			ServiceContext serviceContext)
 		throws PortalException;
 

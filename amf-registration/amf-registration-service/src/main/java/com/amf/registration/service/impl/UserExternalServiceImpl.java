@@ -38,7 +38,6 @@ import org.osgi.service.component.annotations.Component;
 public class UserExternalServiceImpl extends UserExternalServiceBaseImpl {
 
 	public UserExternal addUserExternal(
-			long groupId,
 			String firstName,
 			String lastName,
 			String emailAddress,
@@ -60,7 +59,7 @@ public class UserExternalServiceImpl extends UserExternalServiceBaseImpl {
 		System.out.println("#----- remote sevice called");
 
 		UserExternal userExternal =
-				userExternalLocalService.addUserExternal(groupId, firstName, lastName, emailAddress,
+				userExternalLocalService.addUserExternal(firstName, lastName, emailAddress,
 						userName, male, birthday, password, homePhoneNumber, mobilePhoneNumber,
 						address1, address2, city, state, zipCode, queryQuestion, queryAnswer, serviceContext);
 

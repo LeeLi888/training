@@ -480,6 +480,14 @@ public abstract class UserExternalLocalServiceBaseImpl
 		contactLocalService;
 
 	@Reference
+	protected com.liferay.portal.kernel.service.GroupLocalService
+		groupLocalService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.LayoutSetLocalService
+		layoutSetLocalService;
+
+	@Reference
 	protected com.liferay.portal.kernel.service.PhoneLocalService
 		phoneLocalService;
 

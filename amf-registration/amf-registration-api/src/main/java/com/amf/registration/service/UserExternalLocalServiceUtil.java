@@ -46,20 +46,18 @@ public class UserExternalLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to <code>com.amf.registration.service.impl.UserExternalLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static UserExternal addUserExternal(
-			long groupId, String firstName, String lastName,
-			String emailAddress, String userName, int male,
-			java.util.Date birthday, String password, String homePhoneNumber,
-			String mobilePhoneNumber, String address1, String address2,
-			String city, long state, String zipCode, String queryQuestion,
-			String queryAnswer,
+			String firstName, String lastName, String emailAddress,
+			String userName, int male, java.util.Date birthday, String password,
+			String homePhoneNumber, String mobilePhoneNumber, String address1,
+			String address2, String city, long state, String zipCode,
+			String queryQuestion, String queryAnswer,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws PortalException {
 
 		return getService().addUserExternal(
-			groupId, firstName, lastName, emailAddress, userName, male,
-			birthday, password, homePhoneNumber, mobilePhoneNumber, address1,
-			address2, city, state, zipCode, queryQuestion, queryAnswer,
-			serviceContext);
+			firstName, lastName, emailAddress, userName, male, birthday,
+			password, homePhoneNumber, mobilePhoneNumber, address1, address2,
+			city, state, zipCode, queryQuestion, queryAnswer, serviceContext);
 	}
 
 	/**

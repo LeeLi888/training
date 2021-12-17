@@ -32,20 +32,18 @@ public class UserExternalServiceWrapper
 
 	@Override
 	public com.amf.registration.model.UserExternal addUserExternal(
-			long groupId, String firstName, String lastName,
-			String emailAddress, String userName, int male,
-			java.util.Date birthday, String password, String homePhoneNumber,
-			String mobilePhoneNumber, String address1, String address2,
-			String city, long state, String zipCode, String queryQuestion,
-			String queryAnswer,
+			String firstName, String lastName, String emailAddress,
+			String userName, int male, java.util.Date birthday, String password,
+			String homePhoneNumber, String mobilePhoneNumber, String address1,
+			String address2, String city, long state, String zipCode,
+			String queryQuestion, String queryAnswer,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _userExternalService.addUserExternal(
-			groupId, firstName, lastName, emailAddress, userName, male,
-			birthday, password, homePhoneNumber, mobilePhoneNumber, address1,
-			address2, city, state, zipCode, queryQuestion, queryAnswer,
-			serviceContext);
+			firstName, lastName, emailAddress, userName, male, birthday,
+			password, homePhoneNumber, mobilePhoneNumber, address1, address2,
+			city, state, zipCode, queryQuestion, queryAnswer, serviceContext);
 	}
 
 	/**

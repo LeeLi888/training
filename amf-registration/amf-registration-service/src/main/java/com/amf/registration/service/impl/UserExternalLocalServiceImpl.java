@@ -20,10 +20,8 @@ import com.amf.registration.service.base.UserExternalLocalServiceBaseImpl;
 import com.amf.registration.validator.RegistValidator;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Address;
-import com.liferay.portal.kernel.model.Contact;
-import com.liferay.portal.kernel.model.Phone;
-import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.*;
+import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Date;
@@ -44,7 +42,6 @@ public class UserExternalLocalServiceImpl extends UserExternalLocalServiceBaseIm
 	private RegistValidator _registValidator;
 
 	public UserExternal addUserExternal(
-			long groupId,
 			String firstName,
 			String lastName,
 			String emailAddress,
@@ -97,6 +94,34 @@ public class UserExternalLocalServiceImpl extends UserExternalLocalServiceBaseIm
 		user.setReminderQueryAnswer(queryAnswer);
 		user.setAgreedToTermsOfUse(true);
 		userLocalService.addUser(user);
+
+		// add group
+		long classNameId = ClassNameLocalServiceUtil.getClassNameId(User.class);
+		long groupId = counterLocalService.increment(Group.class.getName());
+		Group group = groupLocalService.createGroup(groupId);
+		group.setCompanyId(companyId);
+		group.setClassNameId(classNameId);
+		group.setClassPK(userId);
+		groupLocalService.addGroup(group);
+
+		// add layoutSet true
+		{
+			long layoutSetId = counterLocalService.increment(LayoutSet.class.getName());
+			LayoutSet layoutSet = layoutSetLocalService.createLayoutSet(layoutSetId);
+			layoutSet.setCompanyId(companyId);
+			layoutSet.setGroupId(groupId);
+			layoutSet.setPrivateLayout(true);
+			layoutSetLocalService.addLayoutSet(layoutSet);
+		}
+		{
+			// add layoutSet false
+			long layoutSetId = counterLocalService.increment(LayoutSet.class.getName());
+			LayoutSet layoutSet = layoutSetLocalService.createLayoutSet(layoutSetId);
+			layoutSet.setCompanyId(companyId);
+			layoutSet.setGroupId(groupId);
+			layoutSet.setPrivateLayout(false);
+			layoutSetLocalService.addLayoutSet(layoutSet);
+		}
 
 		// add contract
 		Contact contact = contactLocalService.createContact(contactId);

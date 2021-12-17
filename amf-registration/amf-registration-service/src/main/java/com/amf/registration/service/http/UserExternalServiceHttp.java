@@ -53,8 +53,8 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class UserExternalServiceHttp {
 
 	public static com.amf.registration.model.UserExternal addUserExternal(
-			HttpPrincipal httpPrincipal, long groupId, String firstName,
-			String lastName, String emailAddress, String userName, int male,
+			HttpPrincipal httpPrincipal, String firstName, String lastName,
+			String emailAddress, String userName, int male,
 			java.util.Date birthday, String password, String homePhoneNumber,
 			String mobilePhoneNumber, String address1, String address2,
 			String city, long state, String zipCode, String queryQuestion,
@@ -68,8 +68,8 @@ public class UserExternalServiceHttp {
 				_addUserExternalParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, firstName, lastName, emailAddress, userName,
-				male, birthday, password, homePhoneNumber, mobilePhoneNumber,
+				methodKey, firstName, lastName, emailAddress, userName, male,
+				birthday, password, homePhoneNumber, mobilePhoneNumber,
 				address1, address2, city, state, zipCode, queryQuestion,
 				queryAnswer, serviceContext);
 
@@ -106,10 +106,10 @@ public class UserExternalServiceHttp {
 
 	private static final Class<?>[] _addUserExternalParameterTypes0 =
 		new Class[] {
-			long.class, String.class, String.class, String.class, String.class,
-			int.class, java.util.Date.class, String.class, String.class,
-			String.class, String.class, String.class, String.class, long.class,
-			String.class, String.class, String.class,
+			String.class, String.class, String.class, String.class, int.class,
+			java.util.Date.class, String.class, String.class, String.class,
+			String.class, String.class, String.class, long.class, String.class,
+			String.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 

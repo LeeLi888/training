@@ -65,22 +65,21 @@ import java.rmi.RemoteException;
 public class UserExternalServiceSoap {
 
 	public static com.amf.registration.model.UserExternalSoap addUserExternal(
-			long groupId, String firstName, String lastName,
-			String emailAddress, String userName, int male,
-			java.util.Date birthday, String password, String homePhoneNumber,
-			String mobilePhoneNumber, String address1, String address2,
-			String city, long state, String zipCode, String queryQuestion,
-			String queryAnswer,
+			String firstName, String lastName, String emailAddress,
+			String userName, int male, java.util.Date birthday, String password,
+			String homePhoneNumber, String mobilePhoneNumber, String address1,
+			String address2, String city, long state, String zipCode,
+			String queryQuestion, String queryAnswer,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 
 		try {
 			com.amf.registration.model.UserExternal returnValue =
 				UserExternalServiceUtil.addUserExternal(
-					groupId, firstName, lastName, emailAddress, userName, male,
-					birthday, password, homePhoneNumber, mobilePhoneNumber,
-					address1, address2, city, state, zipCode, queryQuestion,
-					queryAnswer, serviceContext);
+					firstName, lastName, emailAddress, userName, male, birthday,
+					password, homePhoneNumber, mobilePhoneNumber, address1,
+					address2, city, state, zipCode, queryQuestion, queryAnswer,
+					serviceContext);
 
 			return com.amf.registration.model.UserExternalSoap.toSoapModel(
 				returnValue);

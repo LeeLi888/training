@@ -55,7 +55,7 @@ public class RegistMVCActionCommand extends BaseMVCActionCommand {
         ServiceContext serviceContext = ServiceContextFactory.getInstance(
                 UserExternal.class.getName(), actionRequest);
 
-        long groupId = themeDisplay.getScopeGroupId();
+//        long groupId = themeDisplay.getScopeGroupId();
 
         //get parameter from front
         String first_name = ParamUtil.getString(actionRequest, "first_name");
@@ -83,7 +83,6 @@ public class RegistMVCActionCommand extends BaseMVCActionCommand {
 
             // Call the service
             _userExternalService.addUserExternal(
-                    groupId,
                     first_name,
                     last_name,
                     email_address,

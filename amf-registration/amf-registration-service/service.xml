@@ -20,6 +20,8 @@
 
 		<!-- Reference to Group entity service -->
 		<reference entity="User" package-path="com.liferay.portal"></reference>
+		<reference entity="Group" package-path="com.liferay.portal"></reference>
+		<reference entity="LayoutSet" package-path="com.liferay.portal"></reference>
 		<reference entity="Contact" package-path="com.liferay.portal"></reference>
 		<reference entity="Phone" package-path="com.liferay.portal"></reference>
 		<reference entity="Address" package-path="com.liferay.portal"></reference>

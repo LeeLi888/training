@@ -169,6 +169,21 @@ public abstract class UserExternalServiceBaseImpl
 	protected com.liferay.portal.kernel.service.ContactService contactService;
 
 	@Reference
+	protected com.liferay.portal.kernel.service.GroupLocalService
+		groupLocalService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.GroupService groupService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.LayoutSetLocalService
+		layoutSetLocalService;
+
+	@Reference
+	protected com.liferay.portal.kernel.service.LayoutSetService
+		layoutSetService;
+
+	@Reference
 	protected com.liferay.portal.kernel.service.PhoneLocalService
 		phoneLocalService;
 
