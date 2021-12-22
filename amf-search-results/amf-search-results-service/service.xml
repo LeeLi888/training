@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="com.amf.search.results">
+	<namespace>AmfMember</namespace>
+
+	<entity name="Member" remote-service="true" local-service="true">
+
+		<!-- PK fields -->
+		<column name="memberId" primary="true" type="long"></column>
+
+		<column name="groupId" type="long"></column>
+		<column name="companyId" type="long"></column>
+		<column name="zipCode" type="String"></column>
+		<column name="firstName" type="String"></column>
+		<column name="lastName" type="String"></column>
+		<column name="screenName" type="String"></column>
+		<column name="emailAddress" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+
+		<!-- Order -->
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<finder name="CompanyIdAndZipCode" return-type="Collection">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="zipCode"></finder-column>
+		</finder>
+
+	</entity>
+
+	<!-- Exceptions -->
+	<exceptions>
+		<exception>AmfMemberValidation</exception>
+	</exceptions>
+
+</service-builder>
