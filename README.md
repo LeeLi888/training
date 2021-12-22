@@ -5,9 +5,9 @@ Part 1 --- complete\
 Part 2 --- 70% compelete --> permission problem left\
 Part 3 --- complete
 
-##User Profile Project
-part all --- starting
+## User Profile Project
+part all --- starting <-- 
 
-##Liferay Newsletter Project
+## Liferay Newsletter Project
 part 1 --- pending\
 part 2 --- pending
