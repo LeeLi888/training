@@ -1,0 +1,25 @@
+
+
+<liferay-ui:search-container
+        emptyResultsMessage="no-events"
+        id="eventEntriesAll"
+        curParam="curAll"
+        deltaParam="deltaAll"
+        iteratorURL="<%=iteratorURL%>"
+        total="${eventCountAll}">
+
+    <liferay-ui:search-container-results results="${eventsAll}" />
+
+    <liferay-ui:search-container-row
+            className="com.amf.event.monitor.model.Event"
+            modelVar="entry">
+
+        <%@include file="/META-INF/resources/event/entry_columns.jspf"%>
+
+    </liferay-ui:search-container-row>
+
+    <%-- Iterator / Paging --%>
+    <liferay-ui:search-iterator
+            markupView="lexicon" />
+
+</liferay-ui:search-container>

@@ -1,0 +1,4 @@
+Bundle-Name: amf-user-profile-web
+Bundle-SymbolicName: com.amf.user.profile.web
+Bundle-Version: 1.0.0
+Export-Package: com.amf.user.profile.web.constants

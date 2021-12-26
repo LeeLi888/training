@@ -1,0 +1,13 @@
+dependencies {
+	compile project(":modules:amf-event-monitor:amf-event-monitor-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly group: "javax.portlet", name: "portlet-api"
+	compileOnly group: "javax.servlet", name: "javax.servlet-api"
+}
+
+buildService {
+	apiDir = "../amf-event-monitor-api/src/main/java"
+}
+
+group = "com.amf.event.monitor"
