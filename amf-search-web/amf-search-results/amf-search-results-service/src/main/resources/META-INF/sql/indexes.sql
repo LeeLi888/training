@@ -1,1 +1,0 @@
-create index IX_541628C1 on AmfMember_Member (companyId, zipCode[$COLUMN_LENGTH:75$]);
