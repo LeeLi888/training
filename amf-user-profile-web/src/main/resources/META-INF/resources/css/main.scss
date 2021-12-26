@@ -1,0 +1,26 @@
+.amf-user-profile-web {
+}
+.container-userprofile {
+  margin-top: 20px;
+}
+.container-userprofile fieldset {
+  border: 1px solid #d3d6e0;
+  border-radius: 5px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.container-userprofile fieldset > legend {
+  width: unset;
+  padding: 10px;
+}
+
+.container-userprofile .privacy-setting {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 30px;
+  margin-top: -20px;
+}
+.container-userprofile .privacy-setting > .radio {
+  margin-right: 15px;
+}

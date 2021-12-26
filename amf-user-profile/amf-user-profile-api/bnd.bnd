@@ -1,0 +1,11 @@
+Bundle-Name: amf-user-profile-api
+Bundle-SymbolicName: com.amf.user.profile.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.amf.user.profile.exception,\
+	com.amf.user.profile.model,\
+	com.amf.user.profile.service,\
+	com.amf.user.profile.service.persistence,\
+	com.amf.user.profile.constants
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../amf-user-profile-service/service.xml
