@@ -18,5 +18,11 @@ Training project
 <img src="https://user-images.githubusercontent.com/94338831/147446180-d7532cf1-80e4-4191-9982-6a2409dcd79f.png" width="233px"/>
 
 # Liferay Newsletter Project
-## part 1 --- pending
+## part 1 --- doing
+### create Newsletter structure 
+#### Content & Data -> Web Content -> Structures -> Add Button
+![image](https://user-images.githubusercontent.com/94338831/147478133-4711f704-005e-40e2-9890-6a29572193ff.png)
+#### Basic Web Content - Fieldsets & Issue No & Content Type
+![image](https://user-images.githubusercontent.com/94338831/147479284-2e0f8957-41ce-4464-aedb-9d7cb3e99e65.png)
+
 ## part 2 --- pending
