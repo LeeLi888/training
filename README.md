@@ -12,16 +12,10 @@ Training project
 \
 ![image](https://user-images.githubusercontent.com/94338831/147444797-8136ae46-3087-49ba-a844-e4e21af85da2.png)
 
-# User Profile Project
-## View --- complete
-\
-![screencapture-localhost-8080-web-guest-member-profile-view-test-2021-12-27-15_15_40](https://user-images.githubusercontent.com/94338831/147445577-241920e6-fd96-49c6-a8f7-ce9b1ab6d931.png)
-
-## Edit -- complete
-![screencapture-localhost-8080-web-guest-member-profile-edit-2021-12-27-15_12_13](https://user-images.githubusercontent.com/94338831/147445269-178cec76-987e-44e9-893d-52900ae72acb.png)
-
-## Privacy -- complete
-![screencapture-localhost-8080-web-guest-member-profile-privacy-2021-12-27-15_22_42](https://user-images.githubusercontent.com/94338831/147446180-d7532cf1-80e4-4191-9982-6a2409dcd79f.png)
+# User Profile Project -- complete
+<img src="https://user-images.githubusercontent.com/94338831/147445577-241920e6-fd96-49c6-a8f7-ce9b1ab6d931.png" width="310px" align="left"/>
+<img src="https://user-images.githubusercontent.com/94338831/147445269-178cec76-987e-44e9-893d-52900ae72acb.png" width="295px" align="left"/>
+<img src="https://user-images.githubusercontent.com/94338831/147446180-d7532cf1-80e4-4191-9982-6a2409dcd79f.png" width="283px"/>
 
 # Liferay Newsletter Project
 ## part 1 --- pending\
