@@ -13,9 +13,9 @@ Training project
 ![image](https://user-images.githubusercontent.com/94338831/147444797-8136ae46-3087-49ba-a844-e4e21af85da2.png)
 
 # User Profile Project -- complete
-<img src="https://user-images.githubusercontent.com/94338831/147445577-241920e6-fd96-49c6-a8f7-ce9b1ab6d931.png" width="280px" align="left"/>
-<img src="https://user-images.githubusercontent.com/94338831/147445269-178cec76-987e-44e9-893d-52900ae72acb.png" width="265px" align="left"/>
-<img src="https://user-images.githubusercontent.com/94338831/147446180-d7532cf1-80e4-4191-9982-6a2409dcd79f.png" width="253px"/>
+<img src="https://user-images.githubusercontent.com/94338831/147445577-241920e6-fd96-49c6-a8f7-ce9b1ab6d931.png" width="260px" align="left"/>
+<img src="https://user-images.githubusercontent.com/94338831/147445269-178cec76-987e-44e9-893d-52900ae72acb.png" width="245px" align="left"/>
+<img src="https://user-images.githubusercontent.com/94338831/147446180-d7532cf1-80e4-4191-9982-6a2409dcd79f.png" width="233px"/>
 
 # Liferay Newsletter Project
 ## part 1 --- pending
