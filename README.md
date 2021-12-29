@@ -18,11 +18,18 @@ Training project
 <img src="https://user-images.githubusercontent.com/94338831/147446180-d7532cf1-80e4-4191-9982-6a2409dcd79f.png" width="233px"/>
 
 # Liferay Newsletter Project
-## ◎ Part 1
+## ☑︎ Part 1： Newsletter
 ### create Newsletter structure 
 #### Content & Data -> Web Content -> Structures -> Add Button
 ![image](https://user-images.githubusercontent.com/94338831/147478133-4711f704-005e-40e2-9890-6a29572193ff.png)
 #### Basic Web Content - Fieldsets & Issue No & Content Type
 ![image](https://user-images.githubusercontent.com/94338831/147479284-2e0f8957-41ce-4464-aedb-9d7cb3e99e65.png)
 
-## □ Part 2
+#### App screenshorts
+#### List page
+<img src="https://user-images.githubusercontent.com/94338831/147645535-a9699ce6-afad-4b16-8ebf-8ee533138f8f.png" width="450px"/>
+
+#### Detail page
+<img src="https://user-images.githubusercontent.com/94338831/147645566-30e739b0-652a-4ad3-92fa-10431afcfa1d.png" width="450px"/>
+
+## ◎ Part 2： Newsletter Search
