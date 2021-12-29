@@ -1,0 +1,11 @@
+Bundle-Name: amf-newsletter-api
+Bundle-SymbolicName: com.amf.newsletter.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.amf.newsletter.exception,\
+	com.amf.newsletter.model,\
+	com.amf.newsletter.service,\
+	com.amf.newsletter.service.persistence, \
+	com.amf.newsletter.constants
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../amf-newsletter-service/service.xml

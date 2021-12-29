@@ -1,0 +1,1 @@
+create index IX_B3C297E on AmfNewsletter_Article (journalArticleId[$COLUMN_LENGTH:75$]);

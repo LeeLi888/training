@@ -1,0 +1,48 @@
+.amf-newsletter-web {
+}
+.container-newsletter {
+  padding : 20px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul.articles {
+  margin-left: 30px;
+}
+ul.articles > li {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+ul.articles > li > h3 {
+  color: #6c91b7;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+ul.newletter-months > li > h1 {
+  background-color: #ccc;
+  padding: 5px;
+  text-align: center;
+}
+ul.newsletter-group > li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+ul.newsletter-group > li > a {
+  color: #6c91b7;
+}
+ul.newsletter-group > li > a:hover {
+  text-decoration: none;
+}
+ul.newsletter-group > li:not(:last-child) {
+  border-bottom: 1px dotted #999;
+}
+
+ul.newsletter-group > li > a > p,
+p.issue-date,
+p.byline{
+  margin-bottom: 5px;
+  color: #6c91b7;
+}

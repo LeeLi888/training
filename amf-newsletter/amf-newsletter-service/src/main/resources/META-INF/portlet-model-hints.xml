@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<hint-collection name="TEXT">
+		<hint name="max-length">5000</hint>
+	</hint-collection>
+	<model name="com.amf.newsletter.model.Article">
+		<field name="issueNumber" type="int" />
+		<field name="order" type="int" />
+		<field name="title" type="String">
+			<hint-collection name="TEXT" />
+		</field>
+		<field name="author" type="String" />
+		<field name="content" type="String">
+			<hint-collection name="TEXT" />
+		</field>
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="journalArticleId" type="String" />
+	</model>
+	<model name="com.amf.newsletter.model.Newsletter">
+		<field name="issueNumber" type="int" />
+		<field name="title" type="String">
+			<hint-collection name="TEXT" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXT" />
+		</field>
+		<field name="issueDate" type="Date" />
+		<field name="byline" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="journalArticleId" type="String" />
+	</model>
+</model-hints>
