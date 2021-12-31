@@ -126,7 +126,7 @@ public class ArticleUtil {
 	 * @param issueNumber the issue number
 	 * @return the matching articles
 	 */
-	public static List<Article> findByIssueNumber(int issueNumber) {
+	public static List<Article> findByIssueNumber(long issueNumber) {
 		return getPersistence().findByIssueNumber(issueNumber);
 	}
 
@@ -143,7 +143,7 @@ public class ArticleUtil {
 	 * @return the range of matching articles
 	 */
 	public static List<Article> findByIssueNumber(
-		int issueNumber, int start, int end) {
+		long issueNumber, int start, int end) {
 
 		return getPersistence().findByIssueNumber(issueNumber, start, end);
 	}
@@ -162,7 +162,7 @@ public class ArticleUtil {
 	 * @return the ordered range of matching articles
 	 */
 	public static List<Article> findByIssueNumber(
-		int issueNumber, int start, int end,
+		long issueNumber, int start, int end,
 		OrderByComparator<Article> orderByComparator) {
 
 		return getPersistence().findByIssueNumber(
@@ -184,7 +184,7 @@ public class ArticleUtil {
 	 * @return the ordered range of matching articles
 	 */
 	public static List<Article> findByIssueNumber(
-		int issueNumber, int start, int end,
+		long issueNumber, int start, int end,
 		OrderByComparator<Article> orderByComparator, boolean useFinderCache) {
 
 		return getPersistence().findByIssueNumber(
@@ -200,7 +200,7 @@ public class ArticleUtil {
 	 * @throws NoSuchArticleException if a matching article could not be found
 	 */
 	public static Article findByIssueNumber_First(
-			int issueNumber, OrderByComparator<Article> orderByComparator)
+			long issueNumber, OrderByComparator<Article> orderByComparator)
 		throws com.amf.newsletter.exception.NoSuchArticleException {
 
 		return getPersistence().findByIssueNumber_First(
@@ -215,7 +215,7 @@ public class ArticleUtil {
 	 * @return the first matching article, or <code>null</code> if a matching article could not be found
 	 */
 	public static Article fetchByIssueNumber_First(
-		int issueNumber, OrderByComparator<Article> orderByComparator) {
+		long issueNumber, OrderByComparator<Article> orderByComparator) {
 
 		return getPersistence().fetchByIssueNumber_First(
 			issueNumber, orderByComparator);
@@ -230,7 +230,7 @@ public class ArticleUtil {
 	 * @throws NoSuchArticleException if a matching article could not be found
 	 */
 	public static Article findByIssueNumber_Last(
-			int issueNumber, OrderByComparator<Article> orderByComparator)
+			long issueNumber, OrderByComparator<Article> orderByComparator)
 		throws com.amf.newsletter.exception.NoSuchArticleException {
 
 		return getPersistence().findByIssueNumber_Last(
@@ -245,7 +245,7 @@ public class ArticleUtil {
 	 * @return the last matching article, or <code>null</code> if a matching article could not be found
 	 */
 	public static Article fetchByIssueNumber_Last(
-		int issueNumber, OrderByComparator<Article> orderByComparator) {
+		long issueNumber, OrderByComparator<Article> orderByComparator) {
 
 		return getPersistence().fetchByIssueNumber_Last(
 			issueNumber, orderByComparator);
@@ -254,19 +254,19 @@ public class ArticleUtil {
 	/**
 	 * Returns the articles before and after the current article in the ordered set where issueNumber = &#63;.
 	 *
-	 * @param articlePK the primary key of the current article
+	 * @param articleId the primary key of the current article
 	 * @param issueNumber the issue number
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next article
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
 	public static Article[] findByIssueNumber_PrevAndNext(
-			ArticlePK articlePK, int issueNumber,
+			long articleId, long issueNumber,
 			OrderByComparator<Article> orderByComparator)
 		throws com.amf.newsletter.exception.NoSuchArticleException {
 
 		return getPersistence().findByIssueNumber_PrevAndNext(
-			articlePK, issueNumber, orderByComparator);
+			articleId, issueNumber, orderByComparator);
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class ArticleUtil {
 	 *
 	 * @param issueNumber the issue number
 	 */
-	public static void removeByIssueNumber(int issueNumber) {
+	public static void removeByIssueNumber(long issueNumber) {
 		getPersistence().removeByIssueNumber(issueNumber);
 	}
 
@@ -284,7 +284,7 @@ public class ArticleUtil {
 	 * @param issueNumber the issue number
 	 * @return the number of matching articles
 	 */
-	public static int countByIssueNumber(int issueNumber) {
+	public static int countByIssueNumber(long issueNumber) {
 		return getPersistence().countByIssueNumber(issueNumber);
 	}
 
@@ -355,7 +355,8 @@ public class ArticleUtil {
 	 * @return the matching article
 	 * @throws NoSuchArticleException if a matching article could not be found
 	 */
-	public static Article findByIssueNumberAndOrder(int issueNumber, int order)
+	public static Article findByIssueNumberAndOrder(
+			long issueNumber, long order)
 		throws com.amf.newsletter.exception.NoSuchArticleException {
 
 		return getPersistence().findByIssueNumberAndOrder(issueNumber, order);
@@ -369,7 +370,7 @@ public class ArticleUtil {
 	 * @return the matching article, or <code>null</code> if a matching article could not be found
 	 */
 	public static Article fetchByIssueNumberAndOrder(
-		int issueNumber, int order) {
+		long issueNumber, long order) {
 
 		return getPersistence().fetchByIssueNumberAndOrder(issueNumber, order);
 	}
@@ -383,7 +384,7 @@ public class ArticleUtil {
 	 * @return the matching article, or <code>null</code> if a matching article could not be found
 	 */
 	public static Article fetchByIssueNumberAndOrder(
-		int issueNumber, int order, boolean useFinderCache) {
+		long issueNumber, long order, boolean useFinderCache) {
 
 		return getPersistence().fetchByIssueNumberAndOrder(
 			issueNumber, order, useFinderCache);
@@ -397,7 +398,7 @@ public class ArticleUtil {
 	 * @return the article that was removed
 	 */
 	public static Article removeByIssueNumberAndOrder(
-			int issueNumber, int order)
+			long issueNumber, long order)
 		throws com.amf.newsletter.exception.NoSuchArticleException {
 
 		return getPersistence().removeByIssueNumberAndOrder(issueNumber, order);
@@ -410,7 +411,7 @@ public class ArticleUtil {
 	 * @param order the order
 	 * @return the number of matching articles
 	 */
-	public static int countByIssueNumberAndOrder(int issueNumber, int order) {
+	public static int countByIssueNumberAndOrder(long issueNumber, long order) {
 		return getPersistence().countByIssueNumberAndOrder(issueNumber, order);
 	}
 
@@ -435,24 +436,24 @@ public class ArticleUtil {
 	/**
 	 * Creates a new article with the primary key. Does not add the article to the database.
 	 *
-	 * @param articlePK the primary key for the new article
+	 * @param articleId the primary key for the new article
 	 * @return the new article
 	 */
-	public static Article create(ArticlePK articlePK) {
-		return getPersistence().create(articlePK);
+	public static Article create(long articleId) {
+		return getPersistence().create(articleId);
 	}
 
 	/**
 	 * Removes the article with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article that was removed
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
-	public static Article remove(ArticlePK articlePK)
+	public static Article remove(long articleId)
 		throws com.amf.newsletter.exception.NoSuchArticleException {
 
-		return getPersistence().remove(articlePK);
+		return getPersistence().remove(articleId);
 	}
 
 	public static Article updateImpl(Article article) {
@@ -462,24 +463,24 @@ public class ArticleUtil {
 	/**
 	 * Returns the article with the primary key or throws a <code>NoSuchArticleException</code> if it could not be found.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
-	public static Article findByPrimaryKey(ArticlePK articlePK)
+	public static Article findByPrimaryKey(long articleId)
 		throws com.amf.newsletter.exception.NoSuchArticleException {
 
-		return getPersistence().findByPrimaryKey(articlePK);
+		return getPersistence().findByPrimaryKey(articleId);
 	}
 
 	/**
 	 * Returns the article with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article, or <code>null</code> if a article with the primary key could not be found
 	 */
-	public static Article fetchByPrimaryKey(ArticlePK articlePK) {
-		return getPersistence().fetchByPrimaryKey(articlePK);
+	public static Article fetchByPrimaryKey(long articleId) {
+		return getPersistence().fetchByPrimaryKey(articleId);
 	}
 
 	/**
@@ -559,10 +560,6 @@ public class ArticleUtil {
 	 */
 	public static int countAll() {
 		return getPersistence().countAll();
-	}
-
-	public static Set<String> getCompoundPKColumnNames() {
-		return getPersistence().getCompoundPKColumnNames();
 	}
 
 	public static ArticlePersistence getPersistence() {

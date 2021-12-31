@@ -25,30 +25,30 @@ import java.io.Serializable;
  */
 public class ArticlePK implements Comparable<ArticlePK>, Serializable {
 
-	public int issueNumber;
-	public int order;
+	public long issueNumber;
+	public long order;
 
 	public ArticlePK() {
 	}
 
-	public ArticlePK(int issueNumber, int order) {
+	public ArticlePK(long issueNumber, long order) {
 		this.issueNumber = issueNumber;
 		this.order = order;
 	}
 
-	public int getIssueNumber() {
+	public long getIssueNumber() {
 		return issueNumber;
 	}
 
-	public void setIssueNumber(int issueNumber) {
+	public void setIssueNumber(long issueNumber) {
 		this.issueNumber = issueNumber;
 	}
 
-	public int getOrder() {
+	public long getOrder() {
 		return order;
 	}
 
-	public void setOrder(int order) {
+	public void setOrder(long order) {
 		this.order = order;
 	}
 

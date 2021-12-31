@@ -1,5 +1,6 @@
 package com.amf.newsletter.web.portlet;
 
+import com.amf.newsletter.model.Article;
 import com.amf.newsletter.model.Newsletter;
 import com.amf.newsletter.service.ArticleLocalService;
 import com.amf.newsletter.service.NewsletterLocalService;
@@ -9,14 +10,18 @@ import com.amf.newsletter.web.constants.AmfNewsletterPortletKeys;
 import com.amf.newsletter.web.data.NewsletterGroup;
 import com.amf.newsletter.web.data.NewsletterMonth;
 import com.amf.newsletter.web.data.NewsletterYear;
+import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
-import javax.portlet.Portlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.portlet.*;
 
+import com.liferay.portal.kernel.search.*;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.search.query.util.BooleanQueryUtilities;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -76,7 +81,7 @@ public class AmfNewsletterPortlet extends MVCPortlet {
 		int year = Integer.parseInt(curTab);
 
 		// month loop
-		for (int month=0; month<12; month++) {
+		for (int month=11; month>=0; month--) {
 			NewsletterMonth newsletterMonth = new NewsletterMonth(year, month);
 
 			List<NewsletterGroup> newsletterGroups = new ArrayList<>();
@@ -101,4 +106,5 @@ public class AmfNewsletterPortlet extends MVCPortlet {
 
 		super.render(renderRequest, renderResponse);
 	}
+
 }

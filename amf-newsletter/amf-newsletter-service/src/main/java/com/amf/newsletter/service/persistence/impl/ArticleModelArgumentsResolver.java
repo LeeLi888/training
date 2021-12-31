@@ -131,6 +131,8 @@ public class ArticleModelArgumentsResolver implements ArgumentsResolver {
 	static {
 		long orderByColumnsBitmask = 0;
 
+		orderByColumnsBitmask |= ArticleModelImpl.getColumnBitmask("order_");
+
 		_ORDER_BY_COLUMNS_BITMASK = orderByColumnsBitmask;
 	}
 

@@ -19,8 +19,6 @@ import com.amf.newsletter.model.Article;
 
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
-import java.util.Set;
-
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
@@ -49,7 +47,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @param issueNumber the issue number
 	 * @return the matching articles
 	 */
-	public java.util.List<Article> findByIssueNumber(int issueNumber);
+	public java.util.List<Article> findByIssueNumber(long issueNumber);
 
 	/**
 	 * Returns a range of all the articles where issueNumber = &#63;.
@@ -64,7 +62,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the range of matching articles
 	 */
 	public java.util.List<Article> findByIssueNumber(
-		int issueNumber, int start, int end);
+		long issueNumber, int start, int end);
 
 	/**
 	 * Returns an ordered range of all the articles where issueNumber = &#63;.
@@ -80,7 +78,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the ordered range of matching articles
 	 */
 	public java.util.List<Article> findByIssueNumber(
-		int issueNumber, int start, int end,
+		long issueNumber, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Article>
 			orderByComparator);
 
@@ -99,7 +97,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the ordered range of matching articles
 	 */
 	public java.util.List<Article> findByIssueNumber(
-		int issueNumber, int start, int end,
+		long issueNumber, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Article>
 			orderByComparator,
 		boolean useFinderCache);
@@ -113,7 +111,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @throws NoSuchArticleException if a matching article could not be found
 	 */
 	public Article findByIssueNumber_First(
-			int issueNumber,
+			long issueNumber,
 			com.liferay.portal.kernel.util.OrderByComparator<Article>
 				orderByComparator)
 		throws NoSuchArticleException;
@@ -126,7 +124,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the first matching article, or <code>null</code> if a matching article could not be found
 	 */
 	public Article fetchByIssueNumber_First(
-		int issueNumber,
+		long issueNumber,
 		com.liferay.portal.kernel.util.OrderByComparator<Article>
 			orderByComparator);
 
@@ -139,7 +137,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @throws NoSuchArticleException if a matching article could not be found
 	 */
 	public Article findByIssueNumber_Last(
-			int issueNumber,
+			long issueNumber,
 			com.liferay.portal.kernel.util.OrderByComparator<Article>
 				orderByComparator)
 		throws NoSuchArticleException;
@@ -152,21 +150,21 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the last matching article, or <code>null</code> if a matching article could not be found
 	 */
 	public Article fetchByIssueNumber_Last(
-		int issueNumber,
+		long issueNumber,
 		com.liferay.portal.kernel.util.OrderByComparator<Article>
 			orderByComparator);
 
 	/**
 	 * Returns the articles before and after the current article in the ordered set where issueNumber = &#63;.
 	 *
-	 * @param articlePK the primary key of the current article
+	 * @param articleId the primary key of the current article
 	 * @param issueNumber the issue number
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next article
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
 	public Article[] findByIssueNumber_PrevAndNext(
-			ArticlePK articlePK, int issueNumber,
+			long articleId, long issueNumber,
 			com.liferay.portal.kernel.util.OrderByComparator<Article>
 				orderByComparator)
 		throws NoSuchArticleException;
@@ -176,7 +174,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 *
 	 * @param issueNumber the issue number
 	 */
-	public void removeByIssueNumber(int issueNumber);
+	public void removeByIssueNumber(long issueNumber);
 
 	/**
 	 * Returns the number of articles where issueNumber = &#63;.
@@ -184,7 +182,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @param issueNumber the issue number
 	 * @return the number of matching articles
 	 */
-	public int countByIssueNumber(int issueNumber);
+	public int countByIssueNumber(long issueNumber);
 
 	/**
 	 * Returns the article where journalArticleId = &#63; or throws a <code>NoSuchArticleException</code> if it could not be found.
@@ -239,7 +237,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the matching article
 	 * @throws NoSuchArticleException if a matching article could not be found
 	 */
-	public Article findByIssueNumberAndOrder(int issueNumber, int order)
+	public Article findByIssueNumberAndOrder(long issueNumber, long order)
 		throws NoSuchArticleException;
 
 	/**
@@ -249,7 +247,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @param order the order
 	 * @return the matching article, or <code>null</code> if a matching article could not be found
 	 */
-	public Article fetchByIssueNumberAndOrder(int issueNumber, int order);
+	public Article fetchByIssueNumberAndOrder(long issueNumber, long order);
 
 	/**
 	 * Returns the article where issueNumber = &#63; and order = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
@@ -260,7 +258,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the matching article, or <code>null</code> if a matching article could not be found
 	 */
 	public Article fetchByIssueNumberAndOrder(
-		int issueNumber, int order, boolean useFinderCache);
+		long issueNumber, long order, boolean useFinderCache);
 
 	/**
 	 * Removes the article where issueNumber = &#63; and order = &#63; from the database.
@@ -269,7 +267,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @param order the order
 	 * @return the article that was removed
 	 */
-	public Article removeByIssueNumberAndOrder(int issueNumber, int order)
+	public Article removeByIssueNumberAndOrder(long issueNumber, long order)
 		throws NoSuchArticleException;
 
 	/**
@@ -279,7 +277,7 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @param order the order
 	 * @return the number of matching articles
 	 */
-	public int countByIssueNumberAndOrder(int issueNumber, int order);
+	public int countByIssueNumberAndOrder(long issueNumber, long order);
 
 	/**
 	 * Caches the article in the entity cache if it is enabled.
@@ -298,39 +296,39 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	/**
 	 * Creates a new article with the primary key. Does not add the article to the database.
 	 *
-	 * @param articlePK the primary key for the new article
+	 * @param articleId the primary key for the new article
 	 * @return the new article
 	 */
-	public Article create(ArticlePK articlePK);
+	public Article create(long articleId);
 
 	/**
 	 * Removes the article with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article that was removed
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
-	public Article remove(ArticlePK articlePK) throws NoSuchArticleException;
+	public Article remove(long articleId) throws NoSuchArticleException;
 
 	public Article updateImpl(Article article);
 
 	/**
 	 * Returns the article with the primary key or throws a <code>NoSuchArticleException</code> if it could not be found.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
-	public Article findByPrimaryKey(ArticlePK articlePK)
+	public Article findByPrimaryKey(long articleId)
 		throws NoSuchArticleException;
 
 	/**
 	 * Returns the article with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article, or <code>null</code> if a article with the primary key could not be found
 	 */
-	public Article fetchByPrimaryKey(ArticlePK articlePK);
+	public Article fetchByPrimaryKey(long articleId);
 
 	/**
 	 * Returns all the articles.
@@ -399,7 +397,5 @@ public interface ArticlePersistence extends BasePersistence<Article> {
 	 * @return the number of articles
 	 */
 	public int countAll();
-
-	public Set<String> getCompoundPKColumnNames();
 
 }

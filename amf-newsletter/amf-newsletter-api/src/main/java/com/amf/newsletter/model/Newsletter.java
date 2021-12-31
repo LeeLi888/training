@@ -36,17 +36,17 @@ public interface Newsletter extends NewsletterModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to <code>com.amf.newsletter.model.impl.NewsletterImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<Newsletter, Integer> ISSUE_NUMBER_ACCESSOR =
-		new Accessor<Newsletter, Integer>() {
+	public static final Accessor<Newsletter, Long> ISSUE_NUMBER_ACCESSOR =
+		new Accessor<Newsletter, Long>() {
 
 			@Override
-			public Integer get(Newsletter newsletter) {
+			public Long get(Newsletter newsletter) {
 				return newsletter.getIssueNumber();
 			}
 
 			@Override
-			public Class<Integer> getAttributeClass() {
-				return Integer.class;
+			public Class<Long> getAttributeClass() {
+				return Long.class;
 			}
 
 			@Override

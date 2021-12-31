@@ -14,8 +14,6 @@
 
 package com.amf.newsletter.model;
 
-import com.amf.newsletter.service.persistence.ArticlePK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -35,8 +33,10 @@ public class ArticleSoap implements Serializable {
 	public static ArticleSoap toSoapModel(Article model) {
 		ArticleSoap soapModel = new ArticleSoap();
 
+		soapModel.setArticleId(model.getArticleId());
 		soapModel.setIssueNumber(model.getIssueNumber());
 		soapModel.setOrder(model.getOrder());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setAuthor(model.getAuthor());
 		soapModel.setContent(model.getContent());
@@ -88,29 +88,44 @@ public class ArticleSoap implements Serializable {
 	public ArticleSoap() {
 	}
 
-	public ArticlePK getPrimaryKey() {
-		return new ArticlePK(_issueNumber, _order);
+	public long getPrimaryKey() {
+		return _articleId;
 	}
 
-	public void setPrimaryKey(ArticlePK pk) {
-		setIssueNumber(pk.issueNumber);
-		setOrder(pk.order);
+	public void setPrimaryKey(long pk) {
+		setArticleId(pk);
 	}
 
-	public int getIssueNumber() {
+	public long getArticleId() {
+		return _articleId;
+	}
+
+	public void setArticleId(long articleId) {
+		_articleId = articleId;
+	}
+
+	public long getIssueNumber() {
 		return _issueNumber;
 	}
 
-	public void setIssueNumber(int issueNumber) {
+	public void setIssueNumber(long issueNumber) {
 		_issueNumber = issueNumber;
 	}
 
-	public int getOrder() {
+	public long getOrder() {
 		return _order;
 	}
 
-	public void setOrder(int order) {
+	public void setOrder(long order) {
 		_order = order;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public String getTitle() {
@@ -161,8 +176,10 @@ public class ArticleSoap implements Serializable {
 		_journalArticleId = journalArticleId;
 	}
 
-	private int _issueNumber;
-	private int _order;
+	private long _articleId;
+	private long _issueNumber;
+	private long _order;
+	private long _companyId;
 	private String _title;
 	private String _author;
 	private String _content;

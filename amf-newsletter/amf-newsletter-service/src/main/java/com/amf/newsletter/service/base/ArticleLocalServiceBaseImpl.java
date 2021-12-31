@@ -17,7 +17,6 @@ package com.amf.newsletter.service.base;
 import com.amf.newsletter.model.Article;
 import com.amf.newsletter.service.ArticleLocalService;
 import com.amf.newsletter.service.ArticleLocalServiceUtil;
-import com.amf.newsletter.service.persistence.ArticlePK;
 import com.amf.newsletter.service.persistence.ArticlePersistence;
 import com.amf.newsletter.service.persistence.NewsletterPersistence;
 
@@ -99,13 +98,13 @@ public abstract class ArticleLocalServiceBaseImpl
 	/**
 	 * Creates a new article with the primary key. Does not add the article to the database.
 	 *
-	 * @param articlePK the primary key for the new article
+	 * @param articleId the primary key for the new article
 	 * @return the new article
 	 */
 	@Override
 	@Transactional(enabled = false)
-	public Article createArticle(ArticlePK articlePK) {
-		return articlePersistence.create(articlePK);
+	public Article createArticle(long articleId) {
+		return articlePersistence.create(articleId);
 	}
 
 	/**
@@ -115,14 +114,14 @@ public abstract class ArticleLocalServiceBaseImpl
 	 * <strong>Important:</strong> Inspect ArticleLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article that was removed
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Article deleteArticle(ArticlePK articlePK) throws PortalException {
-		return articlePersistence.remove(articlePK);
+	public Article deleteArticle(long articleId) throws PortalException {
+		return articlePersistence.remove(articleId);
 	}
 
 	/**
@@ -241,20 +240,20 @@ public abstract class ArticleLocalServiceBaseImpl
 	}
 
 	@Override
-	public Article fetchArticle(ArticlePK articlePK) {
-		return articlePersistence.fetchByPrimaryKey(articlePK);
+	public Article fetchArticle(long articleId) {
+		return articlePersistence.fetchByPrimaryKey(articleId);
 	}
 
 	/**
 	 * Returns the article with the primary key.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
 	@Override
-	public Article getArticle(ArticlePK articlePK) throws PortalException {
-		return articlePersistence.findByPrimaryKey(articlePK);
+	public Article getArticle(long articleId) throws PortalException {
+		return articlePersistence.findByPrimaryKey(articleId);
 	}
 
 	@Override
@@ -266,8 +265,7 @@ public abstract class ArticleLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Article.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.issueNumber");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("articleId");
 
 		return actionableDynamicQuery;
 	}
@@ -284,8 +282,7 @@ public abstract class ArticleLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(Article.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.issueNumber");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("articleId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -297,8 +294,7 @@ public abstract class ArticleLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(Article.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.issueNumber");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("articleId");
 	}
 
 	/**
@@ -308,7 +304,7 @@ public abstract class ArticleLocalServiceBaseImpl
 	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 
-		return articlePersistence.create((ArticlePK)primaryKeyObj);
+		return articlePersistence.create(((Long)primaryKeyObj).longValue());
 	}
 
 	/**

@@ -84,7 +84,7 @@ public interface NewsletterLocalService
 	 * @return the new newsletter
 	 */
 	@Transactional(enabled = false)
-	public Newsletter createNewsletter(int issueNumber);
+	public Newsletter createNewsletter(long issueNumber);
 
 	/**
 	 * @throws PortalException
@@ -104,7 +104,7 @@ public interface NewsletterLocalService
 	 * @throws PortalException if a newsletter with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public Newsletter deleteNewsletter(int issueNumber) throws PortalException;
+	public Newsletter deleteNewsletter(long issueNumber) throws PortalException;
 
 	/**
 	 * Deletes the newsletter from the database. Also notifies the appropriate model listeners.
@@ -199,7 +199,7 @@ public interface NewsletterLocalService
 		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Newsletter fetchNewsletter(int issueNumber);
+	public Newsletter fetchNewsletter(long issueNumber);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -215,7 +215,7 @@ public interface NewsletterLocalService
 	 * @throws PortalException if a newsletter with the primary key could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Newsletter getNewsletter(int issueNumber) throws PortalException;
+	public Newsletter getNewsletter(long issueNumber) throws PortalException;
 
 	/**
 	 * Returns a range of all the newsletters.

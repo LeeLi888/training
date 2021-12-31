@@ -66,7 +66,7 @@ public class NewsletterLocalServiceUtil {
 	 * @param issueNumber the primary key for the new newsletter
 	 * @return the new newsletter
 	 */
-	public static Newsletter createNewsletter(int issueNumber) {
+	public static Newsletter createNewsletter(long issueNumber) {
 		return getService().createNewsletter(issueNumber);
 	}
 
@@ -91,7 +91,7 @@ public class NewsletterLocalServiceUtil {
 	 * @return the newsletter that was removed
 	 * @throws PortalException if a newsletter with the primary key could not be found
 	 */
-	public static Newsletter deleteNewsletter(int issueNumber)
+	public static Newsletter deleteNewsletter(long issueNumber)
 		throws PortalException {
 
 		return getService().deleteNewsletter(issueNumber);
@@ -206,7 +206,7 @@ public class NewsletterLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static Newsletter fetchNewsletter(int issueNumber) {
+	public static Newsletter fetchNewsletter(long issueNumber) {
 		return getService().fetchNewsletter(issueNumber);
 	}
 
@@ -230,7 +230,7 @@ public class NewsletterLocalServiceUtil {
 	 * @return the newsletter
 	 * @throws PortalException if a newsletter with the primary key could not be found
 	 */
-	public static Newsletter getNewsletter(int issueNumber)
+	public static Newsletter getNewsletter(long issueNumber)
 		throws PortalException {
 
 		return getService().getNewsletter(issueNumber);

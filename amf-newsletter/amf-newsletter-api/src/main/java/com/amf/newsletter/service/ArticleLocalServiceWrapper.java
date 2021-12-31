@@ -50,14 +50,12 @@ public class ArticleLocalServiceWrapper
 	/**
 	 * Creates a new article with the primary key. Does not add the article to the database.
 	 *
-	 * @param articlePK the primary key for the new article
+	 * @param articleId the primary key for the new article
 	 * @return the new article
 	 */
 	@Override
-	public com.amf.newsletter.model.Article createArticle(
-		com.amf.newsletter.service.persistence.ArticlePK articlePK) {
-
-		return _articleLocalService.createArticle(articlePK);
+	public com.amf.newsletter.model.Article createArticle(long articleId) {
+		return _articleLocalService.createArticle(articleId);
 	}
 
 	/**
@@ -95,16 +93,15 @@ public class ArticleLocalServiceWrapper
 	 * <strong>Important:</strong> Inspect ArticleLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article that was removed
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
 	@Override
-	public com.amf.newsletter.model.Article deleteArticle(
-			com.amf.newsletter.service.persistence.ArticlePK articlePK)
+	public com.amf.newsletter.model.Article deleteArticle(long articleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _articleLocalService.deleteArticle(articlePK);
+		return _articleLocalService.deleteArticle(articleId);
 	}
 
 	/**
@@ -220,10 +217,8 @@ public class ArticleLocalServiceWrapper
 	}
 
 	@Override
-	public com.amf.newsletter.model.Article fetchArticle(
-		com.amf.newsletter.service.persistence.ArticlePK articlePK) {
-
-		return _articleLocalService.fetchArticle(articlePK);
+	public com.amf.newsletter.model.Article fetchArticle(long articleId) {
+		return _articleLocalService.fetchArticle(articleId);
 	}
 
 	@Override
@@ -236,16 +231,15 @@ public class ArticleLocalServiceWrapper
 	/**
 	 * Returns the article with the primary key.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
 	@Override
-	public com.amf.newsletter.model.Article getArticle(
-			com.amf.newsletter.service.persistence.ArticlePK articlePK)
+	public com.amf.newsletter.model.Article getArticle(long articleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _articleLocalService.getArticle(articlePK);
+		return _articleLocalService.getArticle(articleId);
 	}
 
 	@Override
@@ -277,7 +271,7 @@ public class ArticleLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.amf.newsletter.model.Article>
-		getArticlesByIssueNumber(int issueNumber) {
+		getArticlesByIssueNumber(long issueNumber) {
 
 		return _articleLocalService.getArticlesByIssueNumber(issueNumber);
 	}

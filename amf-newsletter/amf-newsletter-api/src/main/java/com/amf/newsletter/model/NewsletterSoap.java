@@ -34,6 +34,7 @@ public class NewsletterSoap implements Serializable {
 		NewsletterSoap soapModel = new NewsletterSoap();
 
 		soapModel.setIssueNumber(model.getIssueNumber());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setIssueDate(model.getIssueDate());
@@ -86,20 +87,28 @@ public class NewsletterSoap implements Serializable {
 	public NewsletterSoap() {
 	}
 
-	public int getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _issueNumber;
 	}
 
-	public void setPrimaryKey(int pk) {
+	public void setPrimaryKey(long pk) {
 		setIssueNumber(pk);
 	}
 
-	public int getIssueNumber() {
+	public long getIssueNumber() {
 		return _issueNumber;
 	}
 
-	public void setIssueNumber(int issueNumber) {
+	public void setIssueNumber(long issueNumber) {
 		_issueNumber = issueNumber;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public String getTitle() {
@@ -158,7 +167,8 @@ public class NewsletterSoap implements Serializable {
 		_journalArticleId = journalArticleId;
 	}
 
-	private int _issueNumber;
+	private long _issueNumber;
+	private long _companyId;
 	private String _title;
 	private String _description;
 	private Date _issueDate;

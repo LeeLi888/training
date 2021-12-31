@@ -63,10 +63,12 @@ public class NewsletterCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{issueNumber=");
 		sb.append(issueNumber);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", title=");
 		sb.append(title);
 		sb.append(", description=");
@@ -91,6 +93,7 @@ public class NewsletterCacheModel
 		NewsletterImpl newsletterImpl = new NewsletterImpl();
 
 		newsletterImpl.setIssueNumber(issueNumber);
+		newsletterImpl.setCompanyId(companyId);
 
 		if (title == null) {
 			newsletterImpl.setTitle("");
@@ -148,7 +151,9 @@ public class NewsletterCacheModel
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		issueNumber = objectInput.readInt();
+		issueNumber = objectInput.readLong();
+
+		companyId = objectInput.readLong();
 		title = objectInput.readUTF();
 		description = objectInput.readUTF();
 		issueDate = objectInput.readLong();
@@ -160,7 +165,9 @@ public class NewsletterCacheModel
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
-		objectOutput.writeInt(issueNumber);
+		objectOutput.writeLong(issueNumber);
+
+		objectOutput.writeLong(companyId);
 
 		if (title == null) {
 			objectOutput.writeUTF("");
@@ -196,7 +203,8 @@ public class NewsletterCacheModel
 		}
 	}
 
-	public int issueNumber;
+	public long issueNumber;
+	public long companyId;
 	public String title;
 	public String description;
 	public long issueDate;

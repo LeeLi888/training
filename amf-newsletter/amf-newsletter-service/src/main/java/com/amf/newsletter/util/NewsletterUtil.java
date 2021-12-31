@@ -15,14 +15,14 @@ public class NewsletterUtil {
 
     private static final String NODE_KEY_CONTENT = "content";
 
-    public static int getIssueNumber(String xmlDocContent) throws DocumentException, NodeNotExistException {
+    public static long getIssueNumber(String xmlDocContent) throws DocumentException, NodeNotExistException {
         return getIssueNumber(SAXReaderUtil.read(xmlDocContent));
     }
 
-    public static int getIssueNumber(Document document) throws DocumentException, NodeNotExistException {
+    public static long getIssueNumber(Document document) throws DocumentException, NodeNotExistException {
         Node node = getNodeByName(document, NODE_KEY_ISSUE_NUMBER);
 
-        return Integer.parseInt(node.getText());
+        return Long.parseLong(node.getText());
     }
 
     public static int getContentType(String xmlDocContent) throws DocumentException, NodeNotExistException {

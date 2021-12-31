@@ -127,7 +127,7 @@ public class NewsletterUtil {
 	 * @return the matching newsletter
 	 * @throws NoSuchNewsletterException if a matching newsletter could not be found
 	 */
-	public static Newsletter findByIssueNumber(int issueNumber)
+	public static Newsletter findByIssueNumber(long issueNumber)
 		throws com.amf.newsletter.exception.NoSuchNewsletterException {
 
 		return getPersistence().findByIssueNumber(issueNumber);
@@ -139,7 +139,7 @@ public class NewsletterUtil {
 	 * @param issueNumber the issue number
 	 * @return the matching newsletter, or <code>null</code> if a matching newsletter could not be found
 	 */
-	public static Newsletter fetchByIssueNumber(int issueNumber) {
+	public static Newsletter fetchByIssueNumber(long issueNumber) {
 		return getPersistence().fetchByIssueNumber(issueNumber);
 	}
 
@@ -151,7 +151,7 @@ public class NewsletterUtil {
 	 * @return the matching newsletter, or <code>null</code> if a matching newsletter could not be found
 	 */
 	public static Newsletter fetchByIssueNumber(
-		int issueNumber, boolean useFinderCache) {
+		long issueNumber, boolean useFinderCache) {
 
 		return getPersistence().fetchByIssueNumber(issueNumber, useFinderCache);
 	}
@@ -162,7 +162,7 @@ public class NewsletterUtil {
 	 * @param issueNumber the issue number
 	 * @return the newsletter that was removed
 	 */
-	public static Newsletter removeByIssueNumber(int issueNumber)
+	public static Newsletter removeByIssueNumber(long issueNumber)
 		throws com.amf.newsletter.exception.NoSuchNewsletterException {
 
 		return getPersistence().removeByIssueNumber(issueNumber);
@@ -174,7 +174,7 @@ public class NewsletterUtil {
 	 * @param issueNumber the issue number
 	 * @return the number of matching newsletters
 	 */
-	public static int countByIssueNumber(int issueNumber) {
+	public static int countByIssueNumber(long issueNumber) {
 		return getPersistence().countByIssueNumber(issueNumber);
 	}
 
@@ -202,7 +202,7 @@ public class NewsletterUtil {
 	 * @param issueNumber the primary key for the new newsletter
 	 * @return the new newsletter
 	 */
-	public static Newsletter create(int issueNumber) {
+	public static Newsletter create(long issueNumber) {
 		return getPersistence().create(issueNumber);
 	}
 
@@ -213,7 +213,7 @@ public class NewsletterUtil {
 	 * @return the newsletter that was removed
 	 * @throws NoSuchNewsletterException if a newsletter with the primary key could not be found
 	 */
-	public static Newsletter remove(int issueNumber)
+	public static Newsletter remove(long issueNumber)
 		throws com.amf.newsletter.exception.NoSuchNewsletterException {
 
 		return getPersistence().remove(issueNumber);
@@ -230,7 +230,7 @@ public class NewsletterUtil {
 	 * @return the newsletter
 	 * @throws NoSuchNewsletterException if a newsletter with the primary key could not be found
 	 */
-	public static Newsletter findByPrimaryKey(int issueNumber)
+	public static Newsletter findByPrimaryKey(long issueNumber)
 		throws com.amf.newsletter.exception.NoSuchNewsletterException {
 
 		return getPersistence().findByPrimaryKey(issueNumber);
@@ -242,7 +242,7 @@ public class NewsletterUtil {
 	 * @param issueNumber the primary key of the newsletter
 	 * @return the newsletter, or <code>null</code> if a newsletter with the primary key could not be found
 	 */
-	public static Newsletter fetchByPrimaryKey(int issueNumber) {
+	public static Newsletter fetchByPrimaryKey(long issueNumber) {
 		return getPersistence().fetchByPrimaryKey(issueNumber);
 	}
 

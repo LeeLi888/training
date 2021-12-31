@@ -16,6 +16,7 @@ package com.amf.newsletter.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
+import com.liferay.portal.kernel.model.ShardedModel;
 
 import java.util.Date;
 
@@ -33,7 +34,7 @@ import org.osgi.annotation.versioning.ProviderType;
  * @generated
  */
 @ProviderType
-public interface NewsletterModel extends BaseModel<Newsletter> {
+public interface NewsletterModel extends BaseModel<Newsletter>, ShardedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -46,28 +47,44 @@ public interface NewsletterModel extends BaseModel<Newsletter> {
 	 *
 	 * @return the primary key of this newsletter
 	 */
-	public int getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this newsletter.
 	 *
 	 * @param primaryKey the primary key of this newsletter
 	 */
-	public void setPrimaryKey(int primaryKey);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Returns the issue number of this newsletter.
 	 *
 	 * @return the issue number of this newsletter
 	 */
-	public int getIssueNumber();
+	public long getIssueNumber();
 
 	/**
 	 * Sets the issue number of this newsletter.
 	 *
 	 * @param issueNumber the issue number of this newsletter
 	 */
-	public void setIssueNumber(int issueNumber);
+	public void setIssueNumber(long issueNumber);
+
+	/**
+	 * Returns the company ID of this newsletter.
+	 *
+	 * @return the company ID of this newsletter
+	 */
+	@Override
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this newsletter.
+	 *
+	 * @param companyId the company ID of this newsletter
+	 */
+	@Override
+	public void setCompanyId(long companyId);
 
 	/**
 	 * Returns the title of this newsletter.

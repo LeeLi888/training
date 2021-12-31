@@ -63,13 +63,11 @@ public class ArticleLocalServiceUtil {
 	/**
 	 * Creates a new article with the primary key. Does not add the article to the database.
 	 *
-	 * @param articlePK the primary key for the new article
+	 * @param articleId the primary key for the new article
 	 * @return the new article
 	 */
-	public static Article createArticle(
-		com.amf.newsletter.service.persistence.ArticlePK articlePK) {
-
-		return getService().createArticle(articlePK);
+	public static Article createArticle(long articleId) {
+		return getService().createArticle(articleId);
 	}
 
 	/**
@@ -103,15 +101,12 @@ public class ArticleLocalServiceUtil {
 	 * <strong>Important:</strong> Inspect ArticleLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article that was removed
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
-	public static Article deleteArticle(
-			com.amf.newsletter.service.persistence.ArticlePK articlePK)
-		throws PortalException {
-
-		return getService().deleteArticle(articlePK);
+	public static Article deleteArticle(long articleId) throws PortalException {
+		return getService().deleteArticle(articleId);
 	}
 
 	/**
@@ -209,10 +204,8 @@ public class ArticleLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static Article fetchArticle(
-		com.amf.newsletter.service.persistence.ArticlePK articlePK) {
-
-		return getService().fetchArticle(articlePK);
+	public static Article fetchArticle(long articleId) {
+		return getService().fetchArticle(articleId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
@@ -224,15 +217,12 @@ public class ArticleLocalServiceUtil {
 	/**
 	 * Returns the article with the primary key.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
-	public static Article getArticle(
-			com.amf.newsletter.service.persistence.ArticlePK articlePK)
-		throws PortalException {
-
-		return getService().getArticle(articlePK);
+	public static Article getArticle(long articleId) throws PortalException {
+		return getService().getArticle(articleId);
 	}
 
 	public static Article getArticleByJournalArticleId(String journalArticleId)
@@ -256,7 +246,7 @@ public class ArticleLocalServiceUtil {
 		return getService().getArticles(start, end);
 	}
 
-	public static List<Article> getArticlesByIssueNumber(int issueNumber) {
+	public static List<Article> getArticlesByIssueNumber(long issueNumber) {
 		return getService().getArticlesByIssueNumber(issueNumber);
 	}
 

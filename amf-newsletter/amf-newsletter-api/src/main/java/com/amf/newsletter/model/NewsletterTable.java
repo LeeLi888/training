@@ -32,8 +32,10 @@ public class NewsletterTable extends BaseTable<NewsletterTable> {
 
 	public static final NewsletterTable INSTANCE = new NewsletterTable();
 
-	public final Column<NewsletterTable, Integer> issueNumber = createColumn(
-		"issueNumber", Integer.class, Types.INTEGER, Column.FLAG_PRIMARY);
+	public final Column<NewsletterTable, Long> issueNumber = createColumn(
+		"issueNumber", Long.class, Types.BIGINT, Column.FLAG_PRIMARY);
+	public final Column<NewsletterTable, Long> companyId = createColumn(
+		"companyId", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
 	public final Column<NewsletterTable, String> title = createColumn(
 		"title", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<NewsletterTable, String> description = createColumn(

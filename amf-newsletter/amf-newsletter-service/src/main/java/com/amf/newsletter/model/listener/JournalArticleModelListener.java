@@ -11,6 +11,7 @@ import com.amf.newsletter.service.exception.NodeNotExistException;
 import com.amf.newsletter.service.persistence.ArticlePK;
 import com.amf.newsletter.util.AmfDateUtil;
 import com.amf.newsletter.util.NewsletterUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.portal.kernel.exception.ModelListenerException;
@@ -57,7 +58,7 @@ public class JournalArticleModelListener extends BaseModelListener<JournalArticl
         try {
             Document document = after.getDocument();
 
-            int issueNumber = NewsletterUtil.getIssueNumber(document);
+            long issueNumber = NewsletterUtil.getIssueNumber(document);
             int contentType = NewsletterUtil.getContentType(document);
 
             // version=1 means new data
@@ -101,7 +102,7 @@ public class JournalArticleModelListener extends BaseModelListener<JournalArticl
         try {
             Document document = after.getDocument();
 
-            int issueNumber = NewsletterUtil.getIssueNumber(document);
+            long issueNumber = NewsletterUtil.getIssueNumber(document);
             int contentType = NewsletterUtil.getContentType(document);
 
             // version=1 means new data
@@ -110,17 +111,19 @@ public class JournalArticleModelListener extends BaseModelListener<JournalArticl
             if (version == 1) {
                 if (contentType == ContentType.Newsletter) {
                     Newsletter newsletter = newsletterLocalService.createNewsletter(issueNumber);
+                    newsletter.setCompanyId(after.getCompanyId());
                     newsletter.setTitle(after.getTitle());
                     newsletter.setDescription(after.getDescription());
                     newsletter.setIssueDate(new Date());
-                    newsletter.setCreateDate(new Date());
-                    newsletter.setModifiedDate(new Date());
+                    //Auto set
+//                    newsletter.setCreateDate(new Date());
+//                    newsletter.setModifiedDate(new Date());
                     newsletter.setJournalArticleId(after.getArticleId());
                     newsletterLocalService.addNewsletter(newsletter);
 
                 } else if (contentType == ContentType.Article) {
                     //get order no
-                    int order = 0;
+                    long order = 0;
                     {
                         List<Article> articles = articleLocalService.getArticlesByIssueNumber(issueNumber);
                         if (articles.size() == 0) {
@@ -130,7 +133,10 @@ public class JournalArticleModelListener extends BaseModelListener<JournalArticl
                         }
                     }
 
-                    Article article = articleLocalService.createArticle(new ArticlePK(issueNumber, order));
+                    Article article = articleLocalService.createArticle(CounterLocalServiceUtil.increment(Article.class.getName()));
+                    article.setIssueNumber(issueNumber);
+                    article.setOrder(order);
+                    article.setCompanyId(after.getCompanyId());
                     article.setTitle(after.getTitle());
                     article.setContent(NewsletterUtil.getContent(document));
                     article.setAuthor(String.valueOf(after.getUserId()));
@@ -154,7 +160,8 @@ public class JournalArticleModelListener extends BaseModelListener<JournalArticl
                     Newsletter newsletter = newsletterLocalService.getNewsletter(issueNumber);
                     newsletter.setTitle(after.getTitle());
                     newsletter.setDescription(after.getDescription());
-                    newsletter.setModifiedDate(new Date());
+                    //Auto set
+//                    newsletter.setModifiedDate(new Date());
                     newsletterLocalService.updateNewsletter(newsletter);
 
                 } else if (contentType == ContentType.Article) {

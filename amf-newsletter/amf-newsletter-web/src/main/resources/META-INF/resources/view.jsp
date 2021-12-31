@@ -2,6 +2,23 @@
 
 <div class="container-fluid container-fluid-max-xl container-newsletter">
 
+	<portlet:renderURL var="searchURL">
+		<portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWLETTER_SEARCH %>" />
+	</portlet:renderURL>
+
+	<aui:form action="${searchURL}" method="post">
+		<aui:row>
+			<aui:col span="8">
+				<aui:input name="keyword" value="${keyword}" label="" placeholder="Please input search keywords.">
+					<aui:validator name="required" />
+				</aui:input>
+			</aui:col>
+			<aui:col span="4">
+				<aui:button type="submit" value="Search" primary="false" />
+			</aui:col>
+		</aui:row>
+	</aui:form>
+
 	<!-- tabs -->
 	<liferay-ui:tabs names="${fn:join(years, ',')}" param="curTab" value="${curTab}">
 	</liferay-ui:tabs>

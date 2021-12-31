@@ -15,7 +15,6 @@
 package com.amf.newsletter.model.impl;
 
 import com.amf.newsletter.model.Article;
-import com.amf.newsletter.service.persistence.ArticlePK;
 
 import com.liferay.petra.lang.HashUtil;
 import com.liferay.petra.string.StringBundler;
@@ -48,7 +47,7 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
 
 		ArticleCacheModel articleCacheModel = (ArticleCacheModel)object;
 
-		if (articlePK.equals(articleCacheModel.articlePK)) {
+		if (articleId == articleCacheModel.articleId) {
 			return true;
 		}
 
@@ -57,17 +56,21 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, articlePK);
+		return HashUtil.hash(0, articleId);
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
-		sb.append("{issueNumber=");
+		sb.append("{articleId=");
+		sb.append(articleId);
+		sb.append(", issueNumber=");
 		sb.append(issueNumber);
 		sb.append(", order=");
 		sb.append(order);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", title=");
 		sb.append(title);
 		sb.append(", author=");
@@ -89,8 +92,10 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
 	public Article toEntityModel() {
 		ArticleImpl articleImpl = new ArticleImpl();
 
+		articleImpl.setArticleId(articleId);
 		articleImpl.setIssueNumber(issueNumber);
 		articleImpl.setOrder(order);
+		articleImpl.setCompanyId(companyId);
 
 		if (title == null) {
 			articleImpl.setTitle("");
@@ -141,24 +146,30 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		issueNumber = objectInput.readInt();
+		articleId = objectInput.readLong();
 
-		order = objectInput.readInt();
+		issueNumber = objectInput.readLong();
+
+		order = objectInput.readLong();
+
+		companyId = objectInput.readLong();
 		title = objectInput.readUTF();
 		author = objectInput.readUTF();
 		content = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		journalArticleId = objectInput.readUTF();
-
-		articlePK = new ArticlePK(issueNumber, order);
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
-		objectOutput.writeInt(issueNumber);
+		objectOutput.writeLong(articleId);
 
-		objectOutput.writeInt(order);
+		objectOutput.writeLong(issueNumber);
+
+		objectOutput.writeLong(order);
+
+		objectOutput.writeLong(companyId);
 
 		if (title == null) {
 			objectOutput.writeUTF("");
@@ -192,14 +203,15 @@ public class ArticleCacheModel implements CacheModel<Article>, Externalizable {
 		}
 	}
 
-	public int issueNumber;
-	public int order;
+	public long articleId;
+	public long issueNumber;
+	public long order;
+	public long companyId;
 	public String title;
 	public String author;
 	public String content;
 	public long createDate;
 	public long modifiedDate;
 	public String journalArticleId;
-	public transient ArticlePK articlePK;
 
 }

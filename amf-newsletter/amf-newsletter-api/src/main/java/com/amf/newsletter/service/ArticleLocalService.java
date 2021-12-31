@@ -16,7 +16,6 @@ package com.amf.newsletter.service;
 
 import com.amf.newsletter.exception.NoSuchArticleException;
 import com.amf.newsletter.model.Article;
-import com.amf.newsletter.service.persistence.ArticlePK;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -81,11 +80,11 @@ public interface ArticleLocalService
 	/**
 	 * Creates a new article with the primary key. Does not add the article to the database.
 	 *
-	 * @param articlePK the primary key for the new article
+	 * @param articleId the primary key for the new article
 	 * @return the new article
 	 */
 	@Transactional(enabled = false)
-	public Article createArticle(ArticlePK articlePK);
+	public Article createArticle(long articleId);
 
 	/**
 	 * @throws PortalException
@@ -113,12 +112,12 @@ public interface ArticleLocalService
 	 * <strong>Important:</strong> Inspect ArticleLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article that was removed
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public Article deleteArticle(ArticlePK articlePK) throws PortalException;
+	public Article deleteArticle(long articleId) throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -200,7 +199,7 @@ public interface ArticleLocalService
 		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Article fetchArticle(ArticlePK articlePK);
+	public Article fetchArticle(long articleId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -208,12 +207,12 @@ public interface ArticleLocalService
 	/**
 	 * Returns the article with the primary key.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article
 	 * @throws PortalException if a article with the primary key could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Article getArticle(ArticlePK articlePK) throws PortalException;
+	public Article getArticle(long articleId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Article getArticleByJournalArticleId(String journalArticleId)
@@ -234,7 +233,7 @@ public interface ArticleLocalService
 	public List<Article> getArticles(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Article> getArticlesByIssueNumber(int issueNumber);
+	public List<Article> getArticlesByIssueNumber(long issueNumber);
 
 	/**
 	 * Returns the number of articles.

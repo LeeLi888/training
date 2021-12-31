@@ -19,7 +19,6 @@ import com.amf.newsletter.model.Article;
 import com.amf.newsletter.model.ArticleTable;
 import com.amf.newsletter.model.impl.ArticleImpl;
 import com.amf.newsletter.model.impl.ArticleModelImpl;
-import com.amf.newsletter.service.persistence.ArticlePK;
 import com.amf.newsletter.service.persistence.ArticlePersistence;
 import com.amf.newsletter.service.persistence.ArticleUtil;
 import com.amf.newsletter.service.persistence.impl.constants.AmfNewsletterPersistenceConstants;
@@ -36,6 +35,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
@@ -110,7 +110,7 @@ public class ArticlePersistenceImpl
 	 * @return the matching articles
 	 */
 	@Override
-	public List<Article> findByIssueNumber(int issueNumber) {
+	public List<Article> findByIssueNumber(long issueNumber) {
 		return findByIssueNumber(
 			issueNumber, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -129,7 +129,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public List<Article> findByIssueNumber(
-		int issueNumber, int start, int end) {
+		long issueNumber, int start, int end) {
 
 		return findByIssueNumber(issueNumber, start, end, null);
 	}
@@ -149,7 +149,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public List<Article> findByIssueNumber(
-		int issueNumber, int start, int end,
+		long issueNumber, int start, int end,
 		OrderByComparator<Article> orderByComparator) {
 
 		return findByIssueNumber(
@@ -172,7 +172,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public List<Article> findByIssueNumber(
-		int issueNumber, int start, int end,
+		long issueNumber, int start, int end,
 		OrderByComparator<Article> orderByComparator, boolean useFinderCache) {
 
 		FinderPath finderPath = null;
@@ -275,7 +275,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public Article findByIssueNumber_First(
-			int issueNumber, OrderByComparator<Article> orderByComparator)
+			long issueNumber, OrderByComparator<Article> orderByComparator)
 		throws NoSuchArticleException {
 
 		Article article = fetchByIssueNumber_First(
@@ -306,7 +306,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public Article fetchByIssueNumber_First(
-		int issueNumber, OrderByComparator<Article> orderByComparator) {
+		long issueNumber, OrderByComparator<Article> orderByComparator) {
 
 		List<Article> list = findByIssueNumber(
 			issueNumber, 0, 1, orderByComparator);
@@ -328,7 +328,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public Article findByIssueNumber_Last(
-			int issueNumber, OrderByComparator<Article> orderByComparator)
+			long issueNumber, OrderByComparator<Article> orderByComparator)
 		throws NoSuchArticleException {
 
 		Article article = fetchByIssueNumber_Last(
@@ -359,7 +359,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public Article fetchByIssueNumber_Last(
-		int issueNumber, OrderByComparator<Article> orderByComparator) {
+		long issueNumber, OrderByComparator<Article> orderByComparator) {
 
 		int count = countByIssueNumber(issueNumber);
 
@@ -380,7 +380,7 @@ public class ArticlePersistenceImpl
 	/**
 	 * Returns the articles before and after the current article in the ordered set where issueNumber = &#63;.
 	 *
-	 * @param articlePK the primary key of the current article
+	 * @param articleId the primary key of the current article
 	 * @param issueNumber the issue number
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next article
@@ -388,11 +388,11 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public Article[] findByIssueNumber_PrevAndNext(
-			ArticlePK articlePK, int issueNumber,
+			long articleId, long issueNumber,
 			OrderByComparator<Article> orderByComparator)
 		throws NoSuchArticleException {
 
-		Article article = findByPrimaryKey(articlePK);
+		Article article = findByPrimaryKey(articleId);
 
 		Session session = null;
 
@@ -420,7 +420,7 @@ public class ArticlePersistenceImpl
 	}
 
 	protected Article getByIssueNumber_PrevAndNext(
-		Session session, Article article, int issueNumber,
+		Session session, Article article, long issueNumber,
 		OrderByComparator<Article> orderByComparator, boolean previous) {
 
 		StringBundler sb = null;
@@ -533,7 +533,7 @@ public class ArticlePersistenceImpl
 	 * @param issueNumber the issue number
 	 */
 	@Override
-	public void removeByIssueNumber(int issueNumber) {
+	public void removeByIssueNumber(long issueNumber) {
 		for (Article article :
 				findByIssueNumber(
 					issueNumber, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -549,7 +549,7 @@ public class ArticlePersistenceImpl
 	 * @return the number of matching articles
 	 */
 	@Override
-	public int countByIssueNumber(int issueNumber) {
+	public int countByIssueNumber(long issueNumber) {
 		FinderPath finderPath = _finderPathCountByIssueNumber;
 
 		Object[] finderArgs = new Object[] {issueNumber};
@@ -592,7 +592,7 @@ public class ArticlePersistenceImpl
 	}
 
 	private static final String _FINDER_COLUMN_ISSUENUMBER_ISSUENUMBER_2 =
-		"article.id.issueNumber = ?";
+		"article.issueNumber = ?";
 
 	private FinderPath _finderPathFetchByJournalArticleId;
 	private FinderPath _finderPathCountByJournalArticleId;
@@ -853,7 +853,7 @@ public class ArticlePersistenceImpl
 	 * @throws NoSuchArticleException if a matching article could not be found
 	 */
 	@Override
-	public Article findByIssueNumberAndOrder(int issueNumber, int order)
+	public Article findByIssueNumberAndOrder(long issueNumber, long order)
 		throws NoSuchArticleException {
 
 		Article article = fetchByIssueNumberAndOrder(issueNumber, order);
@@ -889,7 +889,7 @@ public class ArticlePersistenceImpl
 	 * @return the matching article, or <code>null</code> if a matching article could not be found
 	 */
 	@Override
-	public Article fetchByIssueNumberAndOrder(int issueNumber, int order) {
+	public Article fetchByIssueNumberAndOrder(long issueNumber, long order) {
 		return fetchByIssueNumberAndOrder(issueNumber, order, true);
 	}
 
@@ -903,7 +903,7 @@ public class ArticlePersistenceImpl
 	 */
 	@Override
 	public Article fetchByIssueNumberAndOrder(
-		int issueNumber, int order, boolean useFinderCache) {
+		long issueNumber, long order, boolean useFinderCache) {
 
 		Object[] finderArgs = null;
 
@@ -971,7 +971,7 @@ public class ArticlePersistenceImpl
 							}
 
 							_log.warn(
-								"ArticlePersistenceImpl.fetchByIssueNumberAndOrder(int, int, boolean) with parameters (" +
+								"ArticlePersistenceImpl.fetchByIssueNumberAndOrder(long, long, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
 										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 						}
@@ -1008,7 +1008,7 @@ public class ArticlePersistenceImpl
 	 * @return the article that was removed
 	 */
 	@Override
-	public Article removeByIssueNumberAndOrder(int issueNumber, int order)
+	public Article removeByIssueNumberAndOrder(long issueNumber, long order)
 		throws NoSuchArticleException {
 
 		Article article = findByIssueNumberAndOrder(issueNumber, order);
@@ -1024,7 +1024,7 @@ public class ArticlePersistenceImpl
 	 * @return the number of matching articles
 	 */
 	@Override
-	public int countByIssueNumberAndOrder(int issueNumber, int order) {
+	public int countByIssueNumberAndOrder(long issueNumber, long order) {
 		FinderPath finderPath = _finderPathCountByIssueNumberAndOrder;
 
 		Object[] finderArgs = new Object[] {issueNumber, order};
@@ -1072,10 +1072,10 @@ public class ArticlePersistenceImpl
 
 	private static final String
 		_FINDER_COLUMN_ISSUENUMBERANDORDER_ISSUENUMBER_2 =
-			"article.id.issueNumber = ? AND ";
+			"article.issueNumber = ? AND ";
 
 	private static final String _FINDER_COLUMN_ISSUENUMBERANDORDER_ORDER_2 =
-		"article.id.order = ?";
+		"article.order = ?";
 
 	public ArticlePersistenceImpl() {
 		Map<String, String> dbColumnNames = new HashMap<String, String>();
@@ -1087,7 +1087,7 @@ public class ArticlePersistenceImpl
 		setModelClass(Article.class);
 
 		setModelImplClass(ArticleImpl.class);
-		setModelPKClass(ArticlePK.class);
+		setModelPKClass(long.class);
 
 		setTable(ArticleTable.INSTANCE);
 	}
@@ -1200,15 +1200,17 @@ public class ArticlePersistenceImpl
 	/**
 	 * Creates a new article with the primary key. Does not add the article to the database.
 	 *
-	 * @param articlePK the primary key for the new article
+	 * @param articleId the primary key for the new article
 	 * @return the new article
 	 */
 	@Override
-	public Article create(ArticlePK articlePK) {
+	public Article create(long articleId) {
 		Article article = new ArticleImpl();
 
 		article.setNew(true);
-		article.setPrimaryKey(articlePK);
+		article.setPrimaryKey(articleId);
+
+		article.setCompanyId(CompanyThreadLocal.getCompanyId());
 
 		return article;
 	}
@@ -1216,13 +1218,13 @@ public class ArticlePersistenceImpl
 	/**
 	 * Removes the article with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article that was removed
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
 	@Override
-	public Article remove(ArticlePK articlePK) throws NoSuchArticleException {
-		return remove((Serializable)articlePK);
+	public Article remove(long articleId) throws NoSuchArticleException {
+		return remove((Serializable)articleId);
 	}
 
 	/**
@@ -1401,26 +1403,26 @@ public class ArticlePersistenceImpl
 	/**
 	 * Returns the article with the primary key or throws a <code>NoSuchArticleException</code> if it could not be found.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article
 	 * @throws NoSuchArticleException if a article with the primary key could not be found
 	 */
 	@Override
-	public Article findByPrimaryKey(ArticlePK articlePK)
+	public Article findByPrimaryKey(long articleId)
 		throws NoSuchArticleException {
 
-		return findByPrimaryKey((Serializable)articlePK);
+		return findByPrimaryKey((Serializable)articleId);
 	}
 
 	/**
 	 * Returns the article with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param articlePK the primary key of the article
+	 * @param articleId the primary key of the article
 	 * @return the article, or <code>null</code> if a article with the primary key could not be found
 	 */
 	@Override
-	public Article fetchByPrimaryKey(ArticlePK articlePK) {
-		return fetchByPrimaryKey((Serializable)articlePK);
+	public Article fetchByPrimaryKey(long articleId) {
+		return fetchByPrimaryKey((Serializable)articleId);
 	}
 
 	/**
@@ -1607,18 +1609,13 @@ public class ArticlePersistenceImpl
 	}
 
 	@Override
-	public Set<String> getCompoundPKColumnNames() {
-		return _compoundPKColumnNames;
-	}
-
-	@Override
 	protected EntityCache getEntityCache() {
 		return entityCache;
 	}
 
 	@Override
 	protected String getPKDBName() {
-		return "articlePK";
+		return "articleId";
 	}
 
 	@Override
@@ -1654,20 +1651,20 @@ public class ArticlePersistenceImpl
 		_finderPathWithPaginationFindByIssueNumber = new FinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByIssueNumber",
 			new String[] {
-				Integer.class.getName(), Integer.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
 				Integer.class.getName(), OrderByComparator.class.getName()
 			},
 			new String[] {"issueNumber"}, true);
 
 		_finderPathWithoutPaginationFindByIssueNumber = new FinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByIssueNumber",
-			new String[] {Integer.class.getName()},
-			new String[] {"issueNumber"}, true);
+			new String[] {Long.class.getName()}, new String[] {"issueNumber"},
+			true);
 
 		_finderPathCountByIssueNumber = new FinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByIssueNumber",
-			new String[] {Integer.class.getName()},
-			new String[] {"issueNumber"}, false);
+			new String[] {Long.class.getName()}, new String[] {"issueNumber"},
+			false);
 
 		_finderPathFetchByJournalArticleId = new FinderPath(
 			FINDER_CLASS_NAME_ENTITY, "fetchByJournalArticleId",
@@ -1681,13 +1678,13 @@ public class ArticlePersistenceImpl
 
 		_finderPathFetchByIssueNumberAndOrder = new FinderPath(
 			FINDER_CLASS_NAME_ENTITY, "fetchByIssueNumberAndOrder",
-			new String[] {Integer.class.getName(), Integer.class.getName()},
+			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"issueNumber", "order_"}, true);
 
 		_finderPathCountByIssueNumberAndOrder = new FinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByIssueNumberAndOrder",
-			new String[] {Integer.class.getName(), Integer.class.getName()},
+			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"issueNumber", "order_"}, false);
 
 		_setArticleUtilPersistence(this);
@@ -1772,8 +1769,6 @@ public class ArticlePersistenceImpl
 
 	private static final Set<String> _badColumnNames = SetUtil.fromArray(
 		new String[] {"order"});
-	private static final Set<String> _compoundPKColumnNames = SetUtil.fromArray(
-		new String[] {"issueNumber", "order"});
 
 	@Override
 	protected FinderCache getFinderCache() {

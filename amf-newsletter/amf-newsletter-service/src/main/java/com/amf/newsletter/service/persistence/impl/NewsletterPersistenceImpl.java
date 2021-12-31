@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
@@ -106,7 +107,7 @@ public class NewsletterPersistenceImpl
 	 * @throws NoSuchNewsletterException if a matching newsletter could not be found
 	 */
 	@Override
-	public Newsletter findByIssueNumber(int issueNumber)
+	public Newsletter findByIssueNumber(long issueNumber)
 		throws NoSuchNewsletterException {
 
 		Newsletter newsletter = fetchByIssueNumber(issueNumber);
@@ -138,7 +139,7 @@ public class NewsletterPersistenceImpl
 	 * @return the matching newsletter, or <code>null</code> if a matching newsletter could not be found
 	 */
 	@Override
-	public Newsletter fetchByIssueNumber(int issueNumber) {
+	public Newsletter fetchByIssueNumber(long issueNumber) {
 		return fetchByIssueNumber(issueNumber, true);
 	}
 
@@ -151,7 +152,7 @@ public class NewsletterPersistenceImpl
 	 */
 	@Override
 	public Newsletter fetchByIssueNumber(
-		int issueNumber, boolean useFinderCache) {
+		long issueNumber, boolean useFinderCache) {
 
 		Object[] finderArgs = null;
 
@@ -212,7 +213,7 @@ public class NewsletterPersistenceImpl
 							}
 
 							_log.warn(
-								"NewsletterPersistenceImpl.fetchByIssueNumber(int, boolean) with parameters (" +
+								"NewsletterPersistenceImpl.fetchByIssueNumber(long, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
 										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 						}
@@ -248,7 +249,7 @@ public class NewsletterPersistenceImpl
 	 * @return the newsletter that was removed
 	 */
 	@Override
-	public Newsletter removeByIssueNumber(int issueNumber)
+	public Newsletter removeByIssueNumber(long issueNumber)
 		throws NoSuchNewsletterException {
 
 		Newsletter newsletter = findByIssueNumber(issueNumber);
@@ -263,7 +264,7 @@ public class NewsletterPersistenceImpl
 	 * @return the number of matching newsletters
 	 */
 	@Override
-	public int countByIssueNumber(int issueNumber) {
+	public int countByIssueNumber(long issueNumber) {
 		FinderPath finderPath = _finderPathCountByIssueNumber;
 
 		Object[] finderArgs = new Object[] {issueNumber};
@@ -312,7 +313,7 @@ public class NewsletterPersistenceImpl
 		setModelClass(Newsletter.class);
 
 		setModelImplClass(NewsletterImpl.class);
-		setModelPKClass(int.class);
+		setModelPKClass(long.class);
 
 		setTable(NewsletterTable.INSTANCE);
 	}
@@ -417,11 +418,13 @@ public class NewsletterPersistenceImpl
 	 * @return the new newsletter
 	 */
 	@Override
-	public Newsletter create(int issueNumber) {
+	public Newsletter create(long issueNumber) {
 		Newsletter newsletter = new NewsletterImpl();
 
 		newsletter.setNew(true);
 		newsletter.setPrimaryKey(issueNumber);
+
+		newsletter.setCompanyId(CompanyThreadLocal.getCompanyId());
 
 		return newsletter;
 	}
@@ -434,7 +437,9 @@ public class NewsletterPersistenceImpl
 	 * @throws NoSuchNewsletterException if a newsletter with the primary key could not be found
 	 */
 	@Override
-	public Newsletter remove(int issueNumber) throws NoSuchNewsletterException {
+	public Newsletter remove(long issueNumber)
+		throws NoSuchNewsletterException {
+
 		return remove((Serializable)issueNumber);
 	}
 
@@ -622,7 +627,7 @@ public class NewsletterPersistenceImpl
 	 * @throws NoSuchNewsletterException if a newsletter with the primary key could not be found
 	 */
 	@Override
-	public Newsletter findByPrimaryKey(int issueNumber)
+	public Newsletter findByPrimaryKey(long issueNumber)
 		throws NoSuchNewsletterException {
 
 		return findByPrimaryKey((Serializable)issueNumber);
@@ -635,7 +640,7 @@ public class NewsletterPersistenceImpl
 	 * @return the newsletter, or <code>null</code> if a newsletter with the primary key could not be found
 	 */
 	@Override
-	public Newsletter fetchByPrimaryKey(int issueNumber) {
+	public Newsletter fetchByPrimaryKey(long issueNumber) {
 		return fetchByPrimaryKey((Serializable)issueNumber);
 	}
 
@@ -860,13 +865,13 @@ public class NewsletterPersistenceImpl
 
 		_finderPathFetchByIssueNumber = new FinderPath(
 			FINDER_CLASS_NAME_ENTITY, "fetchByIssueNumber",
-			new String[] {Integer.class.getName()},
-			new String[] {"issueNumber"}, true);
+			new String[] {Long.class.getName()}, new String[] {"issueNumber"},
+			true);
 
 		_finderPathCountByIssueNumber = new FinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByIssueNumber",
-			new String[] {Integer.class.getName()},
-			new String[] {"issueNumber"}, false);
+			new String[] {Long.class.getName()}, new String[] {"issueNumber"},
+			false);
 
 		_setNewsletterUtilPersistence(this);
 	}

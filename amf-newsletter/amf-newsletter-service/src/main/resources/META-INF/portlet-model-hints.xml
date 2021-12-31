@@ -5,8 +5,10 @@
 		<hint name="max-length">5000</hint>
 	</hint-collection>
 	<model name="com.amf.newsletter.model.Article">
-		<field name="issueNumber" type="int" />
-		<field name="order" type="int" />
+		<field name="articleId" type="long" />
+		<field name="issueNumber" type="long" />
+		<field name="order" type="long" />
+		<field name="companyId" type="long" />
 		<field name="title" type="String">
 			<hint-collection name="TEXT" />
 		</field>
@@ -19,7 +21,8 @@
 		<field name="journalArticleId" type="String" />
 	</model>
 	<model name="com.amf.newsletter.model.Newsletter">
-		<field name="issueNumber" type="int" />
+		<field name="issueNumber" type="long" />
+		<field name="companyId" type="long" />
 		<field name="title" type="String">
 			<hint-collection name="TEXT" />
 		</field>

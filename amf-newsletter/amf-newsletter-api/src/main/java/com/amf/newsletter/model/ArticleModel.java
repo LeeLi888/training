@@ -14,10 +14,9 @@
 
 package com.amf.newsletter.model;
 
-import com.amf.newsletter.service.persistence.ArticlePK;
-
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
+import com.liferay.portal.kernel.model.ShardedModel;
 
 import java.util.Date;
 
@@ -35,7 +34,7 @@ import org.osgi.annotation.versioning.ProviderType;
  * @generated
  */
 @ProviderType
-public interface ArticleModel extends BaseModel<Article> {
+public interface ArticleModel extends BaseModel<Article>, ShardedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -48,42 +47,72 @@ public interface ArticleModel extends BaseModel<Article> {
 	 *
 	 * @return the primary key of this article
 	 */
-	public ArticlePK getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this article.
 	 *
 	 * @param primaryKey the primary key of this article
 	 */
-	public void setPrimaryKey(ArticlePK primaryKey);
+	public void setPrimaryKey(long primaryKey);
+
+	/**
+	 * Returns the article ID of this article.
+	 *
+	 * @return the article ID of this article
+	 */
+	public long getArticleId();
+
+	/**
+	 * Sets the article ID of this article.
+	 *
+	 * @param articleId the article ID of this article
+	 */
+	public void setArticleId(long articleId);
 
 	/**
 	 * Returns the issue number of this article.
 	 *
 	 * @return the issue number of this article
 	 */
-	public int getIssueNumber();
+	public long getIssueNumber();
 
 	/**
 	 * Sets the issue number of this article.
 	 *
 	 * @param issueNumber the issue number of this article
 	 */
-	public void setIssueNumber(int issueNumber);
+	public void setIssueNumber(long issueNumber);
 
 	/**
 	 * Returns the order of this article.
 	 *
 	 * @return the order of this article
 	 */
-	public int getOrder();
+	public long getOrder();
 
 	/**
 	 * Sets the order of this article.
 	 *
 	 * @param order the order of this article
 	 */
-	public void setOrder(int order);
+	public void setOrder(long order);
+
+	/**
+	 * Returns the company ID of this article.
+	 *
+	 * @return the company ID of this article
+	 */
+	@Override
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this article.
+	 *
+	 * @param companyId the company ID of this article
+	 */
+	@Override
+	public void setCompanyId(long companyId);
 
 	/**
 	 * Returns the title of this article.

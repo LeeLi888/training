@@ -21,6 +21,9 @@ import com.amf.newsletter.util.AmfDateUtil;
 import com.liferay.portal.aop.AopService;
 
 import com.liferay.portal.kernel.dao.orm.*;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.Calendar;
@@ -48,5 +51,25 @@ public class NewsletterLocalServiceImpl extends NewsletterLocalServiceBaseImpl {
 
 		return list;
 	}
+
+//	@Indexable(type = IndexableType.REINDEX)
+//	@Override
+//	public Newsletter addNewsletter(Newsletter newsletter) {
+//		return super.addNewsletter(newsletter);
+//	}
+//
+//	@Indexable(type = IndexableType.REINDEX)
+//	@Override
+//	public Newsletter updateNewsletter(Newsletter newsletter) {
+//		return super.updateNewsletter(newsletter);
+//	}
+//
+//	@Indexable(type = IndexableType.DELETE)
+//	@Override
+//	public Newsletter deleteNewsletter(long issueNumber) throws PortalException {
+//		return super.deleteNewsletter(issueNumber);
+//	}
+
+
 
 }

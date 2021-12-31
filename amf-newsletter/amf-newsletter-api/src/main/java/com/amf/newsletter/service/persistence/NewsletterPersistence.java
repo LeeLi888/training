@@ -48,7 +48,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @return the matching newsletter
 	 * @throws NoSuchNewsletterException if a matching newsletter could not be found
 	 */
-	public Newsletter findByIssueNumber(int issueNumber)
+	public Newsletter findByIssueNumber(long issueNumber)
 		throws NoSuchNewsletterException;
 
 	/**
@@ -57,7 +57,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @param issueNumber the issue number
 	 * @return the matching newsletter, or <code>null</code> if a matching newsletter could not be found
 	 */
-	public Newsletter fetchByIssueNumber(int issueNumber);
+	public Newsletter fetchByIssueNumber(long issueNumber);
 
 	/**
 	 * Returns the newsletter where issueNumber = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
@@ -67,7 +67,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @return the matching newsletter, or <code>null</code> if a matching newsletter could not be found
 	 */
 	public Newsletter fetchByIssueNumber(
-		int issueNumber, boolean useFinderCache);
+		long issueNumber, boolean useFinderCache);
 
 	/**
 	 * Removes the newsletter where issueNumber = &#63; from the database.
@@ -75,7 +75,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @param issueNumber the issue number
 	 * @return the newsletter that was removed
 	 */
-	public Newsletter removeByIssueNumber(int issueNumber)
+	public Newsletter removeByIssueNumber(long issueNumber)
 		throws NoSuchNewsletterException;
 
 	/**
@@ -84,7 +84,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @param issueNumber the issue number
 	 * @return the number of matching newsletters
 	 */
-	public int countByIssueNumber(int issueNumber);
+	public int countByIssueNumber(long issueNumber);
 
 	/**
 	 * Caches the newsletter in the entity cache if it is enabled.
@@ -106,7 +106,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @param issueNumber the primary key for the new newsletter
 	 * @return the new newsletter
 	 */
-	public Newsletter create(int issueNumber);
+	public Newsletter create(long issueNumber);
 
 	/**
 	 * Removes the newsletter with the primary key from the database. Also notifies the appropriate model listeners.
@@ -115,7 +115,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @return the newsletter that was removed
 	 * @throws NoSuchNewsletterException if a newsletter with the primary key could not be found
 	 */
-	public Newsletter remove(int issueNumber) throws NoSuchNewsletterException;
+	public Newsletter remove(long issueNumber) throws NoSuchNewsletterException;
 
 	public Newsletter updateImpl(Newsletter newsletter);
 
@@ -126,7 +126,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @return the newsletter
 	 * @throws NoSuchNewsletterException if a newsletter with the primary key could not be found
 	 */
-	public Newsletter findByPrimaryKey(int issueNumber)
+	public Newsletter findByPrimaryKey(long issueNumber)
 		throws NoSuchNewsletterException;
 
 	/**
@@ -135,7 +135,7 @@ public interface NewsletterPersistence extends BasePersistence<Newsletter> {
 	 * @param issueNumber the primary key of the newsletter
 	 * @return the newsletter, or <code>null</code> if a newsletter with the primary key could not be found
 	 */
-	public Newsletter fetchByPrimaryKey(int issueNumber);
+	public Newsletter fetchByPrimaryKey(long issueNumber);
 
 	/**
 	 * Returns all the newsletters.

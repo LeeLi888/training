@@ -17,14 +17,16 @@ package com.amf.newsletter.model.impl;
 import com.amf.newsletter.model.Article;
 import com.amf.newsletter.model.ArticleModel;
 import com.amf.newsletter.model.ArticleSoap;
-import com.amf.newsletter.service.persistence.ArticlePK;
 
+import com.liferay.expando.kernel.model.ExpandoBridge;
+import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -71,7 +73,8 @@ public class ArticleModelImpl
 	public static final String TABLE_NAME = "AmfNewsletter_Article";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"issueNumber", Types.INTEGER}, {"order_", Types.INTEGER},
+		{"articleId", Types.BIGINT}, {"issueNumber", Types.BIGINT},
+		{"order_", Types.BIGINT}, {"companyId", Types.BIGINT},
 		{"title", Types.VARCHAR}, {"author", Types.VARCHAR},
 		{"content", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP}, {"journalArticleId", Types.VARCHAR}
@@ -81,8 +84,10 @@ public class ArticleModelImpl
 		new HashMap<String, Integer>();
 
 	static {
-		TABLE_COLUMNS_MAP.put("issueNumber", Types.INTEGER);
-		TABLE_COLUMNS_MAP.put("order_", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("articleId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("issueNumber", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("order_", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("title", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("author", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("content", Types.VARCHAR);
@@ -92,12 +97,12 @@ public class ArticleModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table AmfNewsletter_Article (issueNumber INTEGER not null,order_ INTEGER not null,title TEXT null,author VARCHAR(75) null,content TEXT null,createDate DATE null,modifiedDate DATE null,journalArticleId VARCHAR(75) null,primary key (issueNumber, order_))";
+		"create table AmfNewsletter_Article (articleId LONG not null primary key,issueNumber LONG,order_ LONG,companyId LONG,title TEXT null,author VARCHAR(75) null,content TEXT null,createDate DATE null,modifiedDate DATE null,journalArticleId VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table AmfNewsletter_Article";
 
-	public static final String ORDER_BY_JPQL = " ORDER BY article.id.order ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY article.order ASC";
 
 	public static final String ORDER_BY_SQL =
 		" ORDER BY AmfNewsletter_Article.order_ ASC";
@@ -155,8 +160,10 @@ public class ArticleModelImpl
 
 		Article model = new ArticleImpl();
 
+		model.setArticleId(soapModel.getArticleId());
 		model.setIssueNumber(soapModel.getIssueNumber());
 		model.setOrder(soapModel.getOrder());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setTitle(soapModel.getTitle());
 		model.setAuthor(soapModel.getAuthor());
 		model.setContent(soapModel.getContent());
@@ -193,24 +200,23 @@ public class ArticleModelImpl
 	}
 
 	@Override
-	public ArticlePK getPrimaryKey() {
-		return new ArticlePK(_issueNumber, _order);
+	public long getPrimaryKey() {
+		return _articleId;
 	}
 
 	@Override
-	public void setPrimaryKey(ArticlePK primaryKey) {
-		setIssueNumber(primaryKey.issueNumber);
-		setOrder(primaryKey.order);
+	public void setPrimaryKey(long primaryKey) {
+		setArticleId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return new ArticlePK(_issueNumber, _order);
+		return _articleId;
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey((ArticlePK)primaryKeyObj);
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -312,13 +318,18 @@ public class ArticleModelImpl
 		Map<String, BiConsumer<Article, ?>> attributeSetterBiConsumers =
 			new LinkedHashMap<String, BiConsumer<Article, ?>>();
 
+		attributeGetterFunctions.put("articleId", Article::getArticleId);
+		attributeSetterBiConsumers.put(
+			"articleId", (BiConsumer<Article, Long>)Article::setArticleId);
 		attributeGetterFunctions.put("issueNumber", Article::getIssueNumber);
 		attributeSetterBiConsumers.put(
-			"issueNumber",
-			(BiConsumer<Article, Integer>)Article::setIssueNumber);
+			"issueNumber", (BiConsumer<Article, Long>)Article::setIssueNumber);
 		attributeGetterFunctions.put("order", Article::getOrder);
 		attributeSetterBiConsumers.put(
-			"order", (BiConsumer<Article, Integer>)Article::setOrder);
+			"order", (BiConsumer<Article, Long>)Article::setOrder);
+		attributeGetterFunctions.put("companyId", Article::getCompanyId);
+		attributeSetterBiConsumers.put(
+			"companyId", (BiConsumer<Article, Long>)Article::setCompanyId);
 		attributeGetterFunctions.put("title", Article::getTitle);
 		attributeSetterBiConsumers.put(
 			"title", (BiConsumer<Article, String>)Article::setTitle);
@@ -349,12 +360,27 @@ public class ArticleModelImpl
 
 	@JSON
 	@Override
-	public int getIssueNumber() {
+	public long getArticleId() {
+		return _articleId;
+	}
+
+	@Override
+	public void setArticleId(long articleId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_articleId = articleId;
+	}
+
+	@JSON
+	@Override
+	public long getIssueNumber() {
 		return _issueNumber;
 	}
 
 	@Override
-	public void setIssueNumber(int issueNumber) {
+	public void setIssueNumber(long issueNumber) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -367,19 +393,19 @@ public class ArticleModelImpl
 	 *             #getColumnOriginalValue(String)}
 	 */
 	@Deprecated
-	public int getOriginalIssueNumber() {
-		return GetterUtil.getInteger(
-			this.<Integer>getColumnOriginalValue("issueNumber"));
+	public long getOriginalIssueNumber() {
+		return GetterUtil.getLong(
+			this.<Long>getColumnOriginalValue("issueNumber"));
 	}
 
 	@JSON
 	@Override
-	public int getOrder() {
+	public long getOrder() {
 		return _order;
 	}
 
 	@Override
-	public void setOrder(int order) {
+	public void setOrder(long order) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -392,9 +418,23 @@ public class ArticleModelImpl
 	 *             #getColumnOriginalValue(String)}
 	 */
 	@Deprecated
-	public int getOriginalOrder() {
-		return GetterUtil.getInteger(
-			this.<Integer>getColumnOriginalValue("order_"));
+	public long getOriginalOrder() {
+		return GetterUtil.getLong(this.<Long>getColumnOriginalValue("order_"));
+	}
+
+	@JSON
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_companyId = companyId;
 	}
 
 	@JSON
@@ -547,6 +587,19 @@ public class ArticleModelImpl
 	}
 
 	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(
+			getCompanyId(), Article.class.getName(), getPrimaryKey());
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+	}
+
+	@Override
 	public Article toEscapedModel() {
 		if (_escapedModel == null) {
 			Function<InvocationHandler, Article>
@@ -565,8 +618,10 @@ public class ArticleModelImpl
 	public Object clone() {
 		ArticleImpl articleImpl = new ArticleImpl();
 
+		articleImpl.setArticleId(getArticleId());
 		articleImpl.setIssueNumber(getIssueNumber());
 		articleImpl.setOrder(getOrder());
+		articleImpl.setCompanyId(getCompanyId());
 		articleImpl.setTitle(getTitle());
 		articleImpl.setAuthor(getAuthor());
 		articleImpl.setContent(getContent());
@@ -583,9 +638,13 @@ public class ArticleModelImpl
 	public Article cloneWithOriginalValues() {
 		ArticleImpl articleImpl = new ArticleImpl();
 
+		articleImpl.setArticleId(
+			this.<Long>getColumnOriginalValue("articleId"));
 		articleImpl.setIssueNumber(
-			this.<Integer>getColumnOriginalValue("issueNumber"));
-		articleImpl.setOrder(this.<Integer>getColumnOriginalValue("order_"));
+			this.<Long>getColumnOriginalValue("issueNumber"));
+		articleImpl.setOrder(this.<Long>getColumnOriginalValue("order_"));
+		articleImpl.setCompanyId(
+			this.<Long>getColumnOriginalValue("companyId"));
 		articleImpl.setTitle(this.<String>getColumnOriginalValue("title"));
 		articleImpl.setAuthor(this.<String>getColumnOriginalValue("author"));
 		articleImpl.setContent(this.<String>getColumnOriginalValue("content"));
@@ -632,9 +691,9 @@ public class ArticleModelImpl
 
 		Article article = (Article)object;
 
-		ArticlePK primaryKey = article.getPrimaryKey();
+		long primaryKey = article.getPrimaryKey();
 
-		if (getPrimaryKey().equals(primaryKey)) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {
@@ -644,7 +703,7 @@ public class ArticleModelImpl
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
 	/**
@@ -678,11 +737,13 @@ public class ArticleModelImpl
 	public CacheModel<Article> toCacheModel() {
 		ArticleCacheModel articleCacheModel = new ArticleCacheModel();
 
-		articleCacheModel.articlePK = getPrimaryKey();
+		articleCacheModel.articleId = getArticleId();
 
 		articleCacheModel.issueNumber = getIssueNumber();
 
 		articleCacheModel.order = getOrder();
+
+		articleCacheModel.companyId = getCompanyId();
 
 		articleCacheModel.title = getTitle();
 
@@ -824,8 +885,10 @@ public class ArticleModelImpl
 
 	}
 
-	private int _issueNumber;
-	private int _order;
+	private long _articleId;
+	private long _issueNumber;
+	private long _order;
+	private long _companyId;
 	private String _title;
 	private String _author;
 	private String _content;
@@ -863,8 +926,10 @@ public class ArticleModelImpl
 	private void _setColumnOriginalValues() {
 		_columnOriginalValues = new HashMap<String, Object>();
 
+		_columnOriginalValues.put("articleId", _articleId);
 		_columnOriginalValues.put("issueNumber", _issueNumber);
 		_columnOriginalValues.put("order_", _order);
+		_columnOriginalValues.put("companyId", _companyId);
 		_columnOriginalValues.put("title", _title);
 		_columnOriginalValues.put("author", _author);
 		_columnOriginalValues.put("content", _content);
@@ -894,21 +959,25 @@ public class ArticleModelImpl
 	static {
 		Map<String, Long> columnBitmasks = new HashMap<>();
 
-		columnBitmasks.put("issueNumber", 1L);
+		columnBitmasks.put("articleId", 1L);
 
-		columnBitmasks.put("order_", 2L);
+		columnBitmasks.put("issueNumber", 2L);
 
-		columnBitmasks.put("title", 4L);
+		columnBitmasks.put("order_", 4L);
 
-		columnBitmasks.put("author", 8L);
+		columnBitmasks.put("companyId", 8L);
 
-		columnBitmasks.put("content", 16L);
+		columnBitmasks.put("title", 16L);
 
-		columnBitmasks.put("createDate", 32L);
+		columnBitmasks.put("author", 32L);
 
-		columnBitmasks.put("modifiedDate", 64L);
+		columnBitmasks.put("content", 64L);
 
-		columnBitmasks.put("journalArticleId", 128L);
+		columnBitmasks.put("createDate", 128L);
+
+		columnBitmasks.put("modifiedDate", 256L);
+
+		columnBitmasks.put("journalArticleId", 512L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

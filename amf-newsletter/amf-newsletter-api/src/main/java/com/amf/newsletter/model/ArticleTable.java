@@ -32,10 +32,14 @@ public class ArticleTable extends BaseTable<ArticleTable> {
 
 	public static final ArticleTable INSTANCE = new ArticleTable();
 
-	public final Column<ArticleTable, Integer> issueNumber = createColumn(
-		"issueNumber", Integer.class, Types.INTEGER, Column.FLAG_PRIMARY);
-	public final Column<ArticleTable, Integer> order = createColumn(
-		"order_", Integer.class, Types.INTEGER, Column.FLAG_PRIMARY);
+	public final Column<ArticleTable, Long> articleId = createColumn(
+		"articleId", Long.class, Types.BIGINT, Column.FLAG_PRIMARY);
+	public final Column<ArticleTable, Long> issueNumber = createColumn(
+		"issueNumber", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
+	public final Column<ArticleTable, Long> order = createColumn(
+		"order_", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
+	public final Column<ArticleTable, Long> companyId = createColumn(
+		"companyId", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
 	public final Column<ArticleTable, String> title = createColumn(
 		"title", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<ArticleTable, String> author = createColumn(

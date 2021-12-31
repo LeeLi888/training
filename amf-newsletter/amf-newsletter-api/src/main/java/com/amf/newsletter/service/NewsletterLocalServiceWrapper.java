@@ -57,7 +57,7 @@ public class NewsletterLocalServiceWrapper
 	 */
 	@Override
 	public com.amf.newsletter.model.Newsletter createNewsletter(
-		int issueNumber) {
+		long issueNumber) {
 
 		return _newsletterLocalService.createNewsletter(issueNumber);
 	}
@@ -85,7 +85,8 @@ public class NewsletterLocalServiceWrapper
 	 * @throws PortalException if a newsletter with the primary key could not be found
 	 */
 	@Override
-	public com.amf.newsletter.model.Newsletter deleteNewsletter(int issueNumber)
+	public com.amf.newsletter.model.Newsletter deleteNewsletter(
+			long issueNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _newsletterLocalService.deleteNewsletter(issueNumber);
@@ -223,7 +224,7 @@ public class NewsletterLocalServiceWrapper
 
 	@Override
 	public com.amf.newsletter.model.Newsletter fetchNewsletter(
-		int issueNumber) {
+		long issueNumber) {
 
 		return _newsletterLocalService.fetchNewsletter(issueNumber);
 	}
@@ -250,7 +251,7 @@ public class NewsletterLocalServiceWrapper
 	 * @throws PortalException if a newsletter with the primary key could not be found
 	 */
 	@Override
-	public com.amf.newsletter.model.Newsletter getNewsletter(int issueNumber)
+	public com.amf.newsletter.model.Newsletter getNewsletter(long issueNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _newsletterLocalService.getNewsletter(issueNumber);

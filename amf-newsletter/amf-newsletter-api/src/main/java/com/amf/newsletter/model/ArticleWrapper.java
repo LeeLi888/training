@@ -42,8 +42,10 @@ public class ArticleWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("articleId", getArticleId());
 		attributes.put("issueNumber", getIssueNumber());
 		attributes.put("order", getOrder());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("title", getTitle());
 		attributes.put("author", getAuthor());
 		attributes.put("content", getContent());
@@ -56,16 +58,28 @@ public class ArticleWrapper
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Integer issueNumber = (Integer)attributes.get("issueNumber");
+		Long articleId = (Long)attributes.get("articleId");
+
+		if (articleId != null) {
+			setArticleId(articleId);
+		}
+
+		Long issueNumber = (Long)attributes.get("issueNumber");
 
 		if (issueNumber != null) {
 			setIssueNumber(issueNumber);
 		}
 
-		Integer order = (Integer)attributes.get("order");
+		Long order = (Long)attributes.get("order");
 
 		if (order != null) {
 			setOrder(order);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String title = (String)attributes.get("title");
@@ -111,6 +125,16 @@ public class ArticleWrapper
 	}
 
 	/**
+	 * Returns the article ID of this article.
+	 *
+	 * @return the article ID of this article
+	 */
+	@Override
+	public long getArticleId() {
+		return model.getArticleId();
+	}
+
+	/**
 	 * Returns the author of this article.
 	 *
 	 * @return the author of this article
@@ -118,6 +142,16 @@ public class ArticleWrapper
 	@Override
 	public String getAuthor() {
 		return model.getAuthor();
+	}
+
+	/**
+	 * Returns the company ID of this article.
+	 *
+	 * @return the company ID of this article
+	 */
+	@Override
+	public long getCompanyId() {
+		return model.getCompanyId();
 	}
 
 	/**
@@ -146,7 +180,7 @@ public class ArticleWrapper
 	 * @return the issue number of this article
 	 */
 	@Override
-	public int getIssueNumber() {
+	public long getIssueNumber() {
 		return model.getIssueNumber();
 	}
 
@@ -176,7 +210,7 @@ public class ArticleWrapper
 	 * @return the order of this article
 	 */
 	@Override
-	public int getOrder() {
+	public long getOrder() {
 		return model.getOrder();
 	}
 
@@ -186,7 +220,7 @@ public class ArticleWrapper
 	 * @return the primary key of this article
 	 */
 	@Override
-	public com.amf.newsletter.service.persistence.ArticlePK getPrimaryKey() {
+	public long getPrimaryKey() {
 		return model.getPrimaryKey();
 	}
 
@@ -206,6 +240,16 @@ public class ArticleWrapper
 	}
 
 	/**
+	 * Sets the article ID of this article.
+	 *
+	 * @param articleId the article ID of this article
+	 */
+	@Override
+	public void setArticleId(long articleId) {
+		model.setArticleId(articleId);
+	}
+
+	/**
 	 * Sets the author of this article.
 	 *
 	 * @param author the author of this article
@@ -213,6 +257,16 @@ public class ArticleWrapper
 	@Override
 	public void setAuthor(String author) {
 		model.setAuthor(author);
+	}
+
+	/**
+	 * Sets the company ID of this article.
+	 *
+	 * @param companyId the company ID of this article
+	 */
+	@Override
+	public void setCompanyId(long companyId) {
+		model.setCompanyId(companyId);
 	}
 
 	/**
@@ -241,7 +295,7 @@ public class ArticleWrapper
 	 * @param issueNumber the issue number of this article
 	 */
 	@Override
-	public void setIssueNumber(int issueNumber) {
+	public void setIssueNumber(long issueNumber) {
 		model.setIssueNumber(issueNumber);
 	}
 
@@ -271,7 +325,7 @@ public class ArticleWrapper
 	 * @param order the order of this article
 	 */
 	@Override
-	public void setOrder(int order) {
+	public void setOrder(long order) {
 		model.setOrder(order);
 	}
 
@@ -281,9 +335,7 @@ public class ArticleWrapper
 	 * @param primaryKey the primary key of this article
 	 */
 	@Override
-	public void setPrimaryKey(
-		com.amf.newsletter.service.persistence.ArticlePK primaryKey) {
-
+	public void setPrimaryKey(long primaryKey) {
 		model.setPrimaryKey(primaryKey);
 	}
 

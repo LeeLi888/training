@@ -18,12 +18,15 @@ import com.amf.newsletter.model.Newsletter;
 import com.amf.newsletter.model.NewsletterModel;
 import com.amf.newsletter.model.NewsletterSoap;
 
+import com.liferay.expando.kernel.model.ExpandoBridge;
+import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -71,17 +74,19 @@ public class NewsletterModelImpl
 	public static final String TABLE_NAME = "AmfNewsletter_Newsletter";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"issueNumber", Types.INTEGER}, {"title", Types.VARCHAR},
-		{"description", Types.VARCHAR}, {"issueDate", Types.TIMESTAMP},
-		{"byline", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"journalArticleId", Types.VARCHAR}
+		{"issueNumber", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"title", Types.VARCHAR}, {"description", Types.VARCHAR},
+		{"issueDate", Types.TIMESTAMP}, {"byline", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"journalArticleId", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
 		new HashMap<String, Integer>();
 
 	static {
-		TABLE_COLUMNS_MAP.put("issueNumber", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("issueNumber", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("title", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("issueDate", Types.TIMESTAMP);
@@ -92,7 +97,7 @@ public class NewsletterModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table AmfNewsletter_Newsletter (issueNumber INTEGER not null primary key,title TEXT null,description TEXT null,issueDate DATE null,byline VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,journalArticleId VARCHAR(75) null)";
+		"create table AmfNewsletter_Newsletter (issueNumber LONG not null primary key,companyId LONG,title TEXT null,description TEXT null,issueDate DATE null,byline VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,journalArticleId VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table AmfNewsletter_Newsletter";
@@ -152,6 +157,7 @@ public class NewsletterModelImpl
 		Newsletter model = new NewsletterImpl();
 
 		model.setIssueNumber(soapModel.getIssueNumber());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setIssueDate(soapModel.getIssueDate());
@@ -189,12 +195,12 @@ public class NewsletterModelImpl
 	}
 
 	@Override
-	public int getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _issueNumber;
 	}
 
 	@Override
-	public void setPrimaryKey(int primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		setIssueNumber(primaryKey);
 	}
 
@@ -205,7 +211,7 @@ public class NewsletterModelImpl
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey(((Integer)primaryKeyObj).intValue());
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -311,7 +317,11 @@ public class NewsletterModelImpl
 		attributeGetterFunctions.put("issueNumber", Newsletter::getIssueNumber);
 		attributeSetterBiConsumers.put(
 			"issueNumber",
-			(BiConsumer<Newsletter, Integer>)Newsletter::setIssueNumber);
+			(BiConsumer<Newsletter, Long>)Newsletter::setIssueNumber);
+		attributeGetterFunctions.put("companyId", Newsletter::getCompanyId);
+		attributeSetterBiConsumers.put(
+			"companyId",
+			(BiConsumer<Newsletter, Long>)Newsletter::setCompanyId);
 		attributeGetterFunctions.put("title", Newsletter::getTitle);
 		attributeSetterBiConsumers.put(
 			"title", (BiConsumer<Newsletter, String>)Newsletter::setTitle);
@@ -349,12 +359,12 @@ public class NewsletterModelImpl
 
 	@JSON
 	@Override
-	public int getIssueNumber() {
+	public long getIssueNumber() {
 		return _issueNumber;
 	}
 
 	@Override
-	public void setIssueNumber(int issueNumber) {
+	public void setIssueNumber(long issueNumber) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -367,9 +377,24 @@ public class NewsletterModelImpl
 	 *             #getColumnOriginalValue(String)}
 	 */
 	@Deprecated
-	public int getOriginalIssueNumber() {
-		return GetterUtil.getInteger(
-			this.<Integer>getColumnOriginalValue("issueNumber"));
+	public long getOriginalIssueNumber() {
+		return GetterUtil.getLong(
+			this.<Long>getColumnOriginalValue("issueNumber"));
+	}
+
+	@JSON
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_companyId = companyId;
 	}
 
 	@JSON
@@ -528,6 +553,19 @@ public class NewsletterModelImpl
 	}
 
 	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(
+			getCompanyId(), Newsletter.class.getName(), getPrimaryKey());
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+	}
+
+	@Override
 	public Newsletter toEscapedModel() {
 		if (_escapedModel == null) {
 			Function<InvocationHandler, Newsletter>
@@ -547,6 +585,7 @@ public class NewsletterModelImpl
 		NewsletterImpl newsletterImpl = new NewsletterImpl();
 
 		newsletterImpl.setIssueNumber(getIssueNumber());
+		newsletterImpl.setCompanyId(getCompanyId());
 		newsletterImpl.setTitle(getTitle());
 		newsletterImpl.setDescription(getDescription());
 		newsletterImpl.setIssueDate(getIssueDate());
@@ -565,7 +604,9 @@ public class NewsletterModelImpl
 		NewsletterImpl newsletterImpl = new NewsletterImpl();
 
 		newsletterImpl.setIssueNumber(
-			this.<Integer>getColumnOriginalValue("issueNumber"));
+			this.<Long>getColumnOriginalValue("issueNumber"));
+		newsletterImpl.setCompanyId(
+			this.<Long>getColumnOriginalValue("companyId"));
 		newsletterImpl.setTitle(this.<String>getColumnOriginalValue("title"));
 		newsletterImpl.setDescription(
 			this.<String>getColumnOriginalValue("description"));
@@ -609,7 +650,7 @@ public class NewsletterModelImpl
 
 		Newsletter newsletter = (Newsletter)object;
 
-		int primaryKey = newsletter.getPrimaryKey();
+		long primaryKey = newsletter.getPrimaryKey();
 
 		if (getPrimaryKey() == primaryKey) {
 			return true;
@@ -621,7 +662,7 @@ public class NewsletterModelImpl
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey();
+		return (int)getPrimaryKey();
 	}
 
 	/**
@@ -656,6 +697,8 @@ public class NewsletterModelImpl
 		NewsletterCacheModel newsletterCacheModel = new NewsletterCacheModel();
 
 		newsletterCacheModel.issueNumber = getIssueNumber();
+
+		newsletterCacheModel.companyId = getCompanyId();
 
 		newsletterCacheModel.title = getTitle();
 
@@ -806,7 +849,8 @@ public class NewsletterModelImpl
 
 	}
 
-	private int _issueNumber;
+	private long _issueNumber;
+	private long _companyId;
 	private String _title;
 	private String _description;
 	private Date _issueDate;
@@ -844,6 +888,7 @@ public class NewsletterModelImpl
 		_columnOriginalValues = new HashMap<String, Object>();
 
 		_columnOriginalValues.put("issueNumber", _issueNumber);
+		_columnOriginalValues.put("companyId", _companyId);
 		_columnOriginalValues.put("title", _title);
 		_columnOriginalValues.put("description", _description);
 		_columnOriginalValues.put("issueDate", _issueDate);
@@ -866,19 +911,21 @@ public class NewsletterModelImpl
 
 		columnBitmasks.put("issueNumber", 1L);
 
-		columnBitmasks.put("title", 2L);
+		columnBitmasks.put("companyId", 2L);
 
-		columnBitmasks.put("description", 4L);
+		columnBitmasks.put("title", 4L);
 
-		columnBitmasks.put("issueDate", 8L);
+		columnBitmasks.put("description", 8L);
 
-		columnBitmasks.put("byline", 16L);
+		columnBitmasks.put("issueDate", 16L);
 
-		columnBitmasks.put("createDate", 32L);
+		columnBitmasks.put("byline", 32L);
 
-		columnBitmasks.put("modifiedDate", 64L);
+		columnBitmasks.put("createDate", 64L);
 
-		columnBitmasks.put("journalArticleId", 128L);
+		columnBitmasks.put("modifiedDate", 128L);
+
+		columnBitmasks.put("journalArticleId", 256L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

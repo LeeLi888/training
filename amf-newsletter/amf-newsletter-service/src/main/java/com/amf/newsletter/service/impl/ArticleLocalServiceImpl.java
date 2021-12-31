@@ -39,7 +39,7 @@ public class ArticleLocalServiceImpl extends ArticleLocalServiceBaseImpl {
 		return article;
 	}
 
-	public List<Article> getArticlesByIssueNumber(int issueNumber) {
+	public List<Article> getArticlesByIssueNumber(long issueNumber) {
 		List<Article> articles = articlePersistence.findByIssueNumber(issueNumber);
 
 		return articles;

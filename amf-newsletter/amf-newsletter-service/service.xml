@@ -7,9 +7,10 @@
 	<entity local-service="true" name="Newsletter" remote-service="true">
 
 		<!-- PK fields -->
-		<column name="issueNumber" primary="true" type="int" />
+		<column name="issueNumber" primary="true" type="long" />
 
 		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="title" type="String" />
 		<column name="description" type="String" />
 		<column name="issueDate" type="Date" />
@@ -32,10 +33,12 @@
 	<entity local-service="true" name="Article" remote-service="true">
 
 		<!-- PK fields -->
-		<column name="issueNumber" primary="true" type="int" />
-		<column name="order" primary="true" type="int" />
+		<column name="articleId" primary="true" type="long" />
 
 		<!-- Audit fields -->
+		<column name="issueNumber" type="long" />
+		<column name="order" type="long" />
+		<column name="companyId" type="long" />
 		<column name="title" type="String" />
 		<column name="author" type="String" />
 		<column name="content" type="String" />

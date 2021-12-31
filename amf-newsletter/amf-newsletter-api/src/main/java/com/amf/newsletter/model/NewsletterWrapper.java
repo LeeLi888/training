@@ -43,6 +43,7 @@ public class NewsletterWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("issueNumber", getIssueNumber());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("title", getTitle());
 		attributes.put("description", getDescription());
 		attributes.put("issueDate", getIssueDate());
@@ -56,10 +57,16 @@ public class NewsletterWrapper
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Integer issueNumber = (Integer)attributes.get("issueNumber");
+		Long issueNumber = (Long)attributes.get("issueNumber");
 
 		if (issueNumber != null) {
 			setIssueNumber(issueNumber);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String title = (String)attributes.get("title");
@@ -121,6 +128,16 @@ public class NewsletterWrapper
 	}
 
 	/**
+	 * Returns the company ID of this newsletter.
+	 *
+	 * @return the company ID of this newsletter
+	 */
+	@Override
+	public long getCompanyId() {
+		return model.getCompanyId();
+	}
+
+	/**
 	 * Returns the create date of this newsletter.
 	 *
 	 * @return the create date of this newsletter
@@ -156,7 +173,7 @@ public class NewsletterWrapper
 	 * @return the issue number of this newsletter
 	 */
 	@Override
-	public int getIssueNumber() {
+	public long getIssueNumber() {
 		return model.getIssueNumber();
 	}
 
@@ -186,7 +203,7 @@ public class NewsletterWrapper
 	 * @return the primary key of this newsletter
 	 */
 	@Override
-	public int getPrimaryKey() {
+	public long getPrimaryKey() {
 		return model.getPrimaryKey();
 	}
 
@@ -213,6 +230,16 @@ public class NewsletterWrapper
 	@Override
 	public void setByline(String byline) {
 		model.setByline(byline);
+	}
+
+	/**
+	 * Sets the company ID of this newsletter.
+	 *
+	 * @param companyId the company ID of this newsletter
+	 */
+	@Override
+	public void setCompanyId(long companyId) {
+		model.setCompanyId(companyId);
 	}
 
 	/**
@@ -251,7 +278,7 @@ public class NewsletterWrapper
 	 * @param issueNumber the issue number of this newsletter
 	 */
 	@Override
-	public void setIssueNumber(int issueNumber) {
+	public void setIssueNumber(long issueNumber) {
 		model.setIssueNumber(issueNumber);
 	}
 
@@ -281,7 +308,7 @@ public class NewsletterWrapper
 	 * @param primaryKey the primary key of this newsletter
 	 */
 	@Override
-	public void setPrimaryKey(int primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		model.setPrimaryKey(primaryKey);
 	}
 

@@ -103,7 +103,7 @@ public abstract class NewsletterLocalServiceBaseImpl
 	 */
 	@Override
 	@Transactional(enabled = false)
-	public Newsletter createNewsletter(int issueNumber) {
+	public Newsletter createNewsletter(long issueNumber) {
 		return newsletterPersistence.create(issueNumber);
 	}
 
@@ -120,7 +120,9 @@ public abstract class NewsletterLocalServiceBaseImpl
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Newsletter deleteNewsletter(int issueNumber) throws PortalException {
+	public Newsletter deleteNewsletter(long issueNumber)
+		throws PortalException {
+
 		return newsletterPersistence.remove(issueNumber);
 	}
 
@@ -240,7 +242,7 @@ public abstract class NewsletterLocalServiceBaseImpl
 	}
 
 	@Override
-	public Newsletter fetchNewsletter(int issueNumber) {
+	public Newsletter fetchNewsletter(long issueNumber) {
 		return newsletterPersistence.fetchByPrimaryKey(issueNumber);
 	}
 
@@ -252,7 +254,7 @@ public abstract class NewsletterLocalServiceBaseImpl
 	 * @throws PortalException if a newsletter with the primary key could not be found
 	 */
 	@Override
-	public Newsletter getNewsletter(int issueNumber) throws PortalException {
+	public Newsletter getNewsletter(long issueNumber) throws PortalException {
 		return newsletterPersistence.findByPrimaryKey(issueNumber);
 	}
 
@@ -305,8 +307,7 @@ public abstract class NewsletterLocalServiceBaseImpl
 	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 
-		return newsletterPersistence.create(
-			((Integer)primaryKeyObj).intValue());
+		return newsletterPersistence.create(((Long)primaryKeyObj).longValue());
 	}
 
 	/**
