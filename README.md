@@ -33,5 +33,14 @@ Training project
 <img src="https://user-images.githubusercontent.com/94338831/147645566-30e739b0-652a-4ad3-92fa-10431afcfa1d.png" width="450px"/>
 
 ## ☑︎ Part 2： Newsletter Search
-<img src="https://user-images.githubusercontent.com/94338831/147833225-1470e22d-188d-4631-9f66-2f440aa212fb.png" width="300px" align="left" />
-<img src="https://user-images.githubusercontent.com/94338831/147833283-18bcecf0-065a-4bff-a64e-59dad2209af1.png" width="300px"/>
+<img src="https://user-images.githubusercontent.com/94338831/147833225-1470e22d-188d-4631-9f66-2f440aa212fb.png" width="450px" />
+
+
+### Search Result Page
+<img src="https://user-images.githubusercontent.com/94338831/147833283-18bcecf0-065a-4bff-a64e-59dad2209af1.png" width="450px"/>
+
+# Reference Documents
+#### https://help.liferay.com/hc/en-us/articles/360032887552-Introduction-to-Developing-a-Web-Application
+##### https://help.liferay.com/hc/en-us/articles/360034199332-Using-Resources-and-Permissions
+##### https://help.liferay.com/hc/en-us/articles/360034199432-Understanding-Search-and-Indexing
+
