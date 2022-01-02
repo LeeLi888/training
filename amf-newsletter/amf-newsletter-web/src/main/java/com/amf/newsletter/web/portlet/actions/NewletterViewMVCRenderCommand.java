@@ -33,7 +33,7 @@ import java.util.List;
     immediate = true,
     property = {
         "javax.portlet.name=" + AmfNewsletterPortletKeys.AMFNEWSLETTER,
-        "mvc.command.name=" + MVCCommandNames.NEWLETTER_VIEW
+        "mvc.command.name=" + MVCCommandNames.NEWSLETTER_VIEW
     },
     service = MVCRenderCommand.class
 )

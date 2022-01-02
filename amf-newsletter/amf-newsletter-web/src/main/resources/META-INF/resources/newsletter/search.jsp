@@ -4,7 +4,7 @@
 <div class="container-fluid container-fluid-max-xl container-newsletter container-newsletterr-result">
 
     <portlet:renderURL var="searchURL">
-        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWLETTER_SEARCH %>" />
+        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWSLETTER_SEARCH %>" />
     </portlet:renderURL>
 
     <aui:form action="${searchURL}" method="post">
@@ -28,7 +28,7 @@
             String keyword = ParamUtil.getString(request, "keyword");
             PortletURL iteratorURL = renderResponse.createRenderURL();
             iteratorURL.setParameter("keyword", keyword);
-            iteratorURL.setParameter("mvcRenderCommandName", MVCCommandNames.NEWLETTER_SEARCH);
+            iteratorURL.setParameter("mvcRenderCommandName", MVCCommandNames.NEWSLETTER_SEARCH);
         %>
 
         <!-- search container -->
@@ -45,7 +45,7 @@
 
                 <liferay-ui:search-container-column-text>
                     <portlet:renderURL var="renderURL">
-                        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWLETTER_VIEW %>" />
+                        <portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWSLETTER_VIEW %>" />
                         <portlet:param name="issueNumber" value="${entry.issueNumber}" />
                     </portlet:renderURL>
 

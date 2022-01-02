@@ -3,7 +3,7 @@
 <div class="container-fluid container-fluid-max-xl container-newsletter">
 
 	<portlet:renderURL var="searchURL">
-		<portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWLETTER_SEARCH %>" />
+		<portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWSLETTER_SEARCH %>" />
 	</portlet:renderURL>
 
 	<aui:form action="${searchURL}" method="post">
@@ -40,7 +40,7 @@
 					<c:forEach items="${month.newsletterGroups}" var="group">
 
 						<portlet:renderURL var="renderURL">
-							<portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWLETTER_VIEW %>" />
+							<portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWSLETTER_VIEW %>" />
 							<portlet:param name="issueNumber" value="${group.newsletter.issueNumber}" />
 						</portlet:renderURL>
 

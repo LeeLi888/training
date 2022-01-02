@@ -29,7 +29,7 @@ import java.util.List;
     immediate = true,
     property = {
             "javax.portlet.name=" + AmfNewsletterPortletKeys.AMFNEWSLETTER,
-            "mvc.command.name=" + MVCCommandNames.NEWLETTER_SEARCH
+            "mvc.command.name=" + MVCCommandNames.NEWSLETTER_SEARCH
     },
     service = MVCRenderCommand.class
 )
