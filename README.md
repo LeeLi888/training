@@ -39,6 +39,12 @@ Training project
 ### Search Result Page
 <img src="https://user-images.githubusercontent.com/94338831/147833283-18bcecf0-065a-4bff-a64e-59dad2209af1.png" width="450px"/>
 
+# How to use
+Download and put it under **modules** folder. \
+※ *These modules based on Liferay DXP 7.4* \
+\
+<img src="https://user-images.githubusercontent.com/94338831/147864926-d9cbe2c1-20ea-47bc-a715-32b2f2090202.png" width="450px"/>
+
 # Reference Documents
 #### https://help.liferay.com/hc/en-us/articles/360032887552-Introduction-to-Developing-a-Web-Application
 ##### https://help.liferay.com/hc/en-us/articles/360034199332-Using-Resources-and-Permissions
