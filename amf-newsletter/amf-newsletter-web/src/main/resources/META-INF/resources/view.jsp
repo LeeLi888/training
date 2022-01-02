@@ -25,7 +25,7 @@
 
 	<c:if test="${empty list}">
 		<p>
-			No data.
+			No newsletter found.
 		</p>
 	</c:if>
 
