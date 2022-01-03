@@ -4,7 +4,7 @@ Training project
 ## ☑︎ Part 1： Custom Registration
 \
 ![screencapture-localhost-8080-web-guest-signup-2021-12-27-14_54_15](https://user-images.githubusercontent.com/94338831/147444172-ad330239-fbb7-4658-896e-2068ed8e091e.png)
-## ☑︎ Part 2： Registration Admin Monitor --> permission problem left
+## ☑︎ Part 2： Registration Admin Monitor
 \
 ![screencapture-localhost-8080-web-guest-event-2021-12-27-15_04_20](https://user-images.githubusercontent.com/94338831/147444589-4b33ab52-93fd-4a09-b88d-1d65dacb24e7.png)
 
@@ -30,10 +30,10 @@ Training project
 <img src="https://user-images.githubusercontent.com/94338831/147906194-37b6fb4a-c64a-4e74-9402-ae835a5b21e3.png" width="650px"/>
 
 #### Detail page
-<img src="https://user-images.githubusercontent.com/94338831/147906387-16643f8c-cdda-47bd-80c6-dd002c1fb653.png" width="650px"/>
+<img src="https://user-images.githubusercontent.com/94338831/147918609-91ef6649-fa40-4bda-a2f2-9fcd7ff4615e.png" width="650px"/>
 
 ## ☑︎ Part 2： Newsletter Search
-<img src="https://user-images.githubusercontent.com/94338831/147906514-36f157aa-1365-4747-a36b-6dc967af30fd.png" width="650px" />
+<img src="https://user-images.githubusercontent.com/94338831/147918740-5f95ffad-25c2-4589-9097-fc05972f3d3b.png" width="650px" />
 
 # How to use
 Download and put it under **modules** folder. \
