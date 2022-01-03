@@ -3,14 +3,6 @@
 <routes>
 
     <route>
-        <pattern>/search</pattern>
-        <implicit-parameter name="mvcRenderCommandName">/newsletter/search</implicit-parameter>
-        <implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-        <implicit-parameter name="p_p_state">normal</implicit-parameter>
-        <implicit-parameter name="p_p_mode">view</implicit-parameter>
-    </route>
-
-    <route>
         <pattern>/{issueNumber}</pattern>
         <implicit-parameter name="mvcRenderCommandName">/newsletter/view</implicit-parameter>
         <implicit-parameter name="p_p_lifecycle">0</implicit-parameter>

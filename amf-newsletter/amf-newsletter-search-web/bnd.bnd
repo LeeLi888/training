@@ -1,0 +1,4 @@
+Bundle-Name: amf-newsletter-search-web
+Bundle-SymbolicName: com.amf.newsletter.search.web
+Bundle-Version: 1.0.0
+Export-Package: com.amf.newsletter.search.web.constants

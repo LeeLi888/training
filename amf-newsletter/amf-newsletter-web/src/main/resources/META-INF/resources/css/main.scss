@@ -40,22 +40,8 @@ ul.newsletter-group > li:not(:last-child) {
   border-bottom: 1px dotted #999;
 }
 
-ul.newsletter-group > li > a > p,
-p.issue-date,
-p.byline{
+ul.newsletter-group > li > a > p{
   margin-bottom: 5px;
   color: #6c91b7;
 }
 
-.container-newsletterr-result h1 label {
-  color: #6c91b7;
-  font-size: 30px;
-  margin-left: 10px;
-}
-
-a.search-result-link {
-  text-decoration: none;
-}
-a.search-result-link h2 {
-  color: #6c91b7;
-}

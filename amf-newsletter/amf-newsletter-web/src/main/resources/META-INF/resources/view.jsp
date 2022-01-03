@@ -2,11 +2,7 @@
 
 <div class="container-fluid container-fluid-max-xl container-newsletter">
 
-	<portlet:renderURL var="searchURL">
-		<portlet:param name="mvcRenderCommandName" value="<%=MVCCommandNames.NEWSLETTER_SEARCH %>" />
-	</portlet:renderURL>
-
-	<aui:form action="${searchURL}" method="post">
+	<aui:form action="/newsletter/search" method="post">
 		<aui:row>
 			<aui:col span="8">
 				<aui:input name="keyword" value="${keyword}" label="" placeholder="Please input search keywords.">
