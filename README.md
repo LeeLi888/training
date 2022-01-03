@@ -27,17 +27,13 @@ Training project
 
 #### App screenshorts
 #### List page
-<img src="https://user-images.githubusercontent.com/94338831/147645535-a9699ce6-afad-4b16-8ebf-8ee533138f8f.png" width="450px"/>
+<img src="https://user-images.githubusercontent.com/94338831/147906194-37b6fb4a-c64a-4e74-9402-ae835a5b21e3.png" width="650px"/>
 
 #### Detail page
-<img src="https://user-images.githubusercontent.com/94338831/147645566-30e739b0-652a-4ad3-92fa-10431afcfa1d.png" width="450px"/>
+<img src="https://user-images.githubusercontent.com/94338831/147906387-16643f8c-cdda-47bd-80c6-dd002c1fb653.png" width="650px"/>
 
 ## ☑︎ Part 2： Newsletter Search
-<img src="https://user-images.githubusercontent.com/94338831/147833225-1470e22d-188d-4631-9f66-2f440aa212fb.png" width="450px" />
-
-
-### Search Result Page
-<img src="https://user-images.githubusercontent.com/94338831/147833283-18bcecf0-065a-4bff-a64e-59dad2209af1.png" width="450px"/>
+<img src="https://user-images.githubusercontent.com/94338831/147906514-36f157aa-1365-4747-a36b-6dc967af30fd.png" width="650px" />
 
 # How to use
 Download and put it under **modules** folder. \
